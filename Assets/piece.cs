@@ -20,21 +20,30 @@ public class piece : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(FindClosestSpacetoPiece());
+      FindClosestSpacetoPiece();
 
 
         if (Input.GetMouseButtonUp(0))
         {
+          
+
             //check if all the pieces are in a perfect place
             if (block.GetComponent<move>().perfectPlace)
-            {
-
-                if (nearPiece)
                 {
-                    transform.position = new Vector3(FindClosestSpacetoPiece().transform.position.x, FindClosestSpacetoPiece().transform.position.y, transform.position.z);
-                    //ahora el espacio esta ocupado y ya no podemos mover esta pieza
-                    spaces[0].GetComponent<space>().empty = false;
-                }
+                
+
+                    if (nearPiece)
+                    {
+                        transform.position = new Vector3(FindClosestSpacetoPiece().transform.position.x,
+                                                         FindClosestSpacetoPiece().transform.position.y,
+                                                         transform.position.z);
+                        //ahora el espacio esta ocupado y ya no podemos mover esta pieza
+                        FindClosestSpacetoPiece().GetComponent<space>().empty = false;
+
+                        //cant move that block any more
+                        block.GetComponent<move>().firstMove = false;
+                    }
+                
             }
         }
 
@@ -80,6 +89,8 @@ public class piece : MonoBehaviour
             {
                 less = dist;
                 ClosestSpace = space;
+                //check if it is a free space
+             if( space.GetComponent<space>().empty )
                 nearPiece = true;
 
             }
