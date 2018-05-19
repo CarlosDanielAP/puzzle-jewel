@@ -13,6 +13,7 @@ public class piece : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager");
         nearPiece = false;
         spaces = gameManager.GetComponent<Manager>().spaces;
 
@@ -36,7 +37,7 @@ public class piece : MonoBehaviour
                     {
                         transform.position = new Vector3(FindClosestSpacetoPiece().transform.position.x,
                                                          FindClosestSpacetoPiece().transform.position.y,
-                                                         transform.position.z);
+                                                         transform.position.z+0.1f);
                         //ahora el espacio esta ocupado y ya no podemos mover esta pieza
                         FindClosestSpacetoPiece().GetComponent<space>().empty = false;
 
