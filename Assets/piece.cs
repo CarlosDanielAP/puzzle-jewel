@@ -2,57 +2,87 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class piece : MonoBehaviour {
-    float distance = 9;
-    public bool firstMove;
+public class piece : MonoBehaviour
+{
+
+
     public GameObject gameManager;
     private Transform[] spaces;
+    public bool nearPiece;
+    private Transform ClosestSpace;
 
     void Start()
     {
-        firstMove = true;
-        spaces= gameManager.GetComponent<Manager>().spaces;
+        nearPiece = false;
+        spaces = gameManager.GetComponent<Manager>().spaces;
 
     }
 
     void Update()
     {
-        if (firstMove)
-        {
-            if (Vector2.Distance(transform.position, spaces[0].transform.position) < 0.5f)
-            {
-                Debug.Log("cerca");
-                //si no esta ocupado lo tomamos
-                if (spaces[0].GetComponent<space>().empty)
-                {
-                    //si soltamos la pieza ocupa el lugar del espacio
-                    if (Input.GetMouseButtonUp(0))
-                    {
-                        Debug.Log("ocupar");
-                        transform.position = new Vector3(spaces[0].transform.position.x, spaces[0].transform.position.y, transform.position.z);
-                        //ahora el espacio esta ocupado y ya no podemos mover esta pieza
-                        spaces[0].GetComponent<space>().empty = false;
-                        firstMove = false;
+        Debug.Log(FindClosestSpacetoPiece());
 
-                    }
-                }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+
+        }
+
+
+
+
+            /* if (Vector2.Distance(transform.position, spaces[0].transform.position) < 0.5f)
+             {
+                 Debug.Log("cerca");
+                 //si no esta ocupado lo tomamos
+                 if (spaces[0].GetComponent<space>().empty)
+                 {
+                     //si soltamos la pieza ocupa el lugar del espacio
+                     if (Input.GetMouseButtonUp(0))
+                     {
+                         Debug.Log("ocupar");
+                         transform.position = new Vector3(spaces[0].transform.position.x, spaces[0].transform.position.y, transform.position.z);
+                         //ahora el espacio esta ocupado y ya no podemos mover esta pieza
+                         spaces[0].GetComponent<space>().empty = false;
+
+
+                     }
+                 }
+             }*/
+
+
+
+        }
+
+
+
+
+
+
+    public Transform FindClosestSpacetoPiece ()
+    {
+        float less = 0.5f;
+        float dist;
+        foreach (Transform space in spaces)
+        {
+            dist = Vector2.Distance(space.position, transform.position);
+            //if (Vector2.Distance(transform.position, space.position) < 0.5f)
+            if (dist < less)
+            {
+                less = dist;
+                ClosestSpace = space;
+                nearPiece = true;
+
+            }
+
+
+            if (less >= 0.5)
+            {
+                ClosestSpace = null;
+                nearPiece = false;
             }
         }
         
-       
+        return ClosestSpace;
     }
-
-    void OnMouseDrag()
-    {
-
-        if (firstMove)
-        {
-
-
-            Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
-            Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            transform.position = objPosition;
-        }
-    }
-
 }
