@@ -5,7 +5,7 @@ using UnityEngine;
 public class piece : MonoBehaviour
 {
 
-
+    public GameObject block;
     public GameObject gameManager;
     private Transform[] spaces;
     public bool nearPiece;
@@ -25,7 +25,17 @@ public class piece : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            //check if all the pieces are in a perfect place
+            if (block.GetComponent<move>().perfectPlace)
+            {
 
+                if (nearPiece)
+                {
+                    transform.position = new Vector3(FindClosestSpacetoPiece().transform.position.x, FindClosestSpacetoPiece().transform.position.y, transform.position.z);
+                    //ahora el espacio esta ocupado y ya no podemos mover esta pieza
+                    spaces[0].GetComponent<space>().empty = false;
+                }
+            }
         }
 
 
@@ -66,7 +76,6 @@ public class piece : MonoBehaviour
         foreach (Transform space in spaces)
         {
             dist = Vector2.Distance(space.position, transform.position);
-            //if (Vector2.Distance(transform.position, space.position) < 0.5f)
             if (dist < less)
             {
                 less = dist;
