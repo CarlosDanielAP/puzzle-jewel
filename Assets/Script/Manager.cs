@@ -7,7 +7,8 @@ public class Manager : MonoBehaviour {
     public int sizeVertical;
     public Transform []spaces;
     public Transform[] Horizontals;
-    public bool completeLine;
+    public bool completeLineh;
+    public bool completeLinev;
     int line;
     int column;
     // Use this for initialization
@@ -20,7 +21,8 @@ public class Manager : MonoBehaviour {
     }
 
     void Start () {
-        completeLine = true;
+        completeLineh = true;
+        completeLinev = true;
 
         for (int i = 0; i < spaces.Length; i++)
         {
@@ -30,103 +32,71 @@ public class Manager : MonoBehaviour {
             
         }
 
-        
-
-
-
-
+     
 
         }
 
     // Update is called once per frame
     void Update () {
+        ///check to the riht
+       
+            for (int i = 0; i < sizeVertical; i++)
+            {
+                line = i * sizeHorizontal;
+
+                completeLineh = true;
+                for (int j = 0; j < sizeHorizontal; j++)
+                {
+
+                if (spaces[j+line].GetComponent<space>().empty)
+                    {
+                        completeLineh = false;
+                    
+                    }
+               
+                }
+            if (completeLineh)
+            {
+                Debug.Log("completa" + line);
+                break;
+            }
 
 
-        for (int i = 0; i < sizeHorizontal; i++)
+        }
+//check down
+        for (int k = 0; k < sizeHorizontal; k++)
         {
-            column = i;
-
-
+       
+            column = k;
+            completeLinev = true;
             for (int j = 0; j < sizeVertical; j++)
             {
-               // Debug.Log(column);
-                column += sizeVertical;
-
-
-
-            }
-
-        }
-        //
-
-        /*Debug.Log(column);
-
-        if (spaces[column].GetComponent<space>().empty)
-        {
-            completeLine = false;
-
-
-
-        }
-        column += 8;
-
-        if (completeLine)
-        {
-            Debug.Log("completa" + line);
-
-        }*/
-
-
-
-
-
-
-
-
-
-        //check horizontal lines
-        for (int j = 0; j < spaces.Length; j++)
-        {
-            Debug.Log(j);
             
-            if (j >= 8)
-            {
-                if (j % 8 == 0)
+               
+                if (spaces[column].GetComponent<space>().empty)
                 {
-                    line = j;
-                    completeLine = true;
+                    completeLinev = false;
 
-                    for (int i = line - 8; i < line; i++)
-                    {
-
-                        if (spaces[i].GetComponent<space>().empty)
-                        {
-                            completeLine = false;
-                            break;
-                        }
-
-
-                    }
-                    if (completeLine)
-                    {
-                        Debug.Log("completa" + line);
-                        break;
-                    }
+                 break;
 
                 }
+                column += 8;
             }
+            if (completeLinev)
+            {
+               Debug.Log("completa" + k);
+                break;
+            }
+
+
         }
 
-          
-
-
-
 
     }
 
 
 
-    }
+}
 
     
 
