@@ -19,6 +19,18 @@ public class move : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        //check if the block have childs if not its destoy
+
+
+        if (transform.childCount <= 0)
+        {
+           
+            Debug.Log("huerfano");
+            Destroy(gameObject);
+        }
+
+
+
         //if any piece of the block its in a perfect place 
         perfectPlace = true;
         for(int i=0; i < pieces.Length; i++)
