@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61417241705228342}
   m_Layer: 0
   m_Name: Single
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

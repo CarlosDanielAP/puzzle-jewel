@@ -10,6 +10,7 @@ public class Manager : MonoBehaviour {
     public bool completeLineh;
     public bool completeLinev;
     public bool checkall;
+    public static bool noblocks;
     int line;
     int column;
     // Use this for initialization
@@ -25,6 +26,7 @@ public class Manager : MonoBehaviour {
         completeLineh = true;
         completeLinev = true;
         checkall = false;
+        noblocks = false;
 
         for (int i = 0; i < spaces.Length; i++)
         {
@@ -41,9 +43,18 @@ public class Manager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
+        //check if there are no block to play
+        if (GameObject.FindGameObjectsWithTag("Block").Length == 0)
+        {
+            noblocks = true;
+        }
+        if (GameObject.FindGameObjectsWithTag("Block").Length > 0)
+        {
+            noblocks = false;
+        }
 
 
-        if (checkall)
+            if (checkall)
         {
             Debug.Log("scanning");
              for (int k = 0; k < spaces.Length; k++)
