@@ -40,7 +40,8 @@ public class Manager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        
+
+
         for (int i = 0; i < sizeHorizontal; i++)
         {
             column = i;
@@ -48,88 +49,84 @@ public class Manager : MonoBehaviour {
 
             for (int j = 0; j < sizeVertical; j++)
             {
-                Debug.Log(column);
-                column+=  sizeVertical;
-               
+               // Debug.Log(column);
+                column += sizeVertical;
+
 
 
             }
-            
+
         }
-        
+        //
 
+        /*Debug.Log(column);
 
-        for (int j = 0; j <= spaces.Length; j++)
+        if (spaces[column].GetComponent<space>().empty)
         {
-            
-            completeLine = true;
-            
-             
-            //completeLine = true;
-
-            Debug.Log(column);
-
-            if (spaces[column].GetComponent<space>().empty)
-            {
-                completeLine = false;
-
-
-
-            }
-            column += 8;
-
-            if (completeLine)
-            {
-                Debug.Log("completa" + line);
-
-            }
-
-
-
-
-
-
-
-
-
-            //check horizontal lines
-            /*  if (j >= 8)
-              {
-                  if (j % 8 == 0)
-                  {
-                      line = j;
-
-
-                      for (int i = line - 8; i < line; i++)
-                      {
-
-                          if (spaces[i].GetComponent<space>().empty)
-                          {
-                              completeLine = false;
-                              break;
-                          }
-
-
-                      }
-                      if (completeLine)
-                      {
-                          Debug.Log("completa" + line);
-                          break;
-                      }
-
-                  }
-              }
-
-              */
-
+            completeLine = false;
 
 
 
         }
+        column += 8;
+
+        if (completeLine)
+        {
+            Debug.Log("completa" + line);
+
+        }*/
+
+
+
+
+
+
+
+
+
+        //check horizontal lines
+        for (int j = 0; j < spaces.Length; j++)
+        {
+            Debug.Log(j);
+            
+            if (j >= 8)
+            {
+                if (j % 8 == 0)
+                {
+                    line = j;
+                    completeLine = true;
+
+                    for (int i = line - 8; i < line; i++)
+                    {
+
+                        if (spaces[i].GetComponent<space>().empty)
+                        {
+                            completeLine = false;
+                            break;
+                        }
+
+
+                    }
+                    if (completeLine)
+                    {
+                        Debug.Log("completa" + line);
+                        break;
+                    }
+
+                }
+            }
+        }
+
+          
+
+
+
+
+    }
 
 
 
     }
 
     
-}
+
