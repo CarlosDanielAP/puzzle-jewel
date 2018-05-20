@@ -9,6 +9,7 @@ public class Manager : MonoBehaviour {
     public Transform[] Horizontals;
     public bool completeLineh;
     public bool completeLinev;
+    public bool checkall;
     int line;
     int column;
     // Use this for initialization
@@ -23,6 +24,7 @@ public class Manager : MonoBehaviour {
     void Start () {
         completeLineh = true;
         completeLinev = true;
+        checkall = false;
 
         for (int i = 0; i < spaces.Length; i++)
         {
@@ -38,63 +40,143 @@ public class Manager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        ///check to the riht
-       
-            for (int i = 0; i < sizeVertical; i++)
-            {
-                line = i * sizeHorizontal;
-
-                completeLineh = true;
-                for (int j = 0; j < sizeHorizontal; j++)
-                {
-
-                if (spaces[j+line].GetComponent<space>().empty)
-                    {
-                        completeLineh = false;
-                    
-                    }
-               
-                }
-            if (completeLineh)
-            {
-                Debug.Log("completa" + line);
-                break;
-            }
 
 
+
+        if (checkall)
+        {
+            Debug.Log("scanning");
+             for (int k = 0; k < spaces.Length; k++)
+             {
+
+
+                 if (spaces[k].transform.childCount <= 0)
+                 {
+
+                     spaces[k].GetComponent<space>().empty = true;
+                 }
+             }
+             checkall = false;
         }
-//check down
+        
+        else
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                checkRight();
+            }
+            checkall = true;
+        }
+
+
+
+    }
+    void checkDown(bool alone)
+    {
         for (int k = 0; k < sizeHorizontal; k++)
         {
-       
+
             column = k;
             completeLinev = true;
             for (int j = 0; j < sizeVertical; j++)
             {
-            
-               
+
+
                 if (spaces[column].GetComponent<space>().empty)
                 {
                     completeLinev = false;
 
-                 break;
+                    break;
 
                 }
                 column += 8;
             }
             if (completeLinev)
             {
-               Debug.Log("completa" + k);
+                
+                column = k;
+                Debug.Log("completa" + k);
+                //erase that line
+                for (int j = 0; j < sizeVertical; j++)
+                {
+
+
+                    foreach (Transform child in spaces[column].transform)
+                    {
+                        GameObject.Destroy(child.gameObject);
+                        //make that space usable again
+                      if(alone)
+                        spaces[column].GetComponent<space>().empty = true;
+                    }
+                    column += sizeVertical;
+                }
+               
                 break;
             }
 
 
         }
+        
+
+    }
+    void checkRight() {
+        Debug.Log("helo");
+        for (int i = 0; i < sizeVertical; i++)
+        {
+            line = i * sizeHorizontal;
+
+            completeLineh = true;
+            for (int j = 0; j < sizeHorizontal; j++)
+            {
+
+                if (spaces[j + line].GetComponent<space>().empty)
+                {
+                    completeLineh = false;
+
+                }
+
+            }
+            if (completeLineh)
+            {
+               // checkDown();
+                Debug.Log("completa" + line);
+                //erase that line
+                for (int j = line; j < line + sizeHorizontal; j++)
+                {
+                    foreach (Transform child in spaces[j].transform)
+                    {
+                     
+                        GameObject.Destroy(child.gameObject);
+                        spaces[j].GetComponent<space>().empty = true;
+                        checkDown(false);
+                        
+                      
+                    }
+                }
+
+              
+                break;
+
+               
+            }
+
+
+           
+
+        }
+        
+
+        if (!completeLineh)
+        {
+            checkDown(true);
+        }
+
+       
 
 
     }
 
-
+    
 
 }
 
