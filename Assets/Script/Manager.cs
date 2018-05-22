@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Manager : MonoBehaviour {
+    public AudioClip[] soundsFX;
+    public static bool play;
+    public Text scoreText;
+    public  int score;
     public int sizeHorizontal;
     public int sizeVertical;
     public Transform []spaces;
@@ -11,7 +16,7 @@ public class Manager : MonoBehaviour {
     public bool completeLinev;
     public bool checkall;
     public static bool noblocks;
-    int line;
+   public  int line;
     int column;
     // Use this for initialization
     void Awake()
@@ -23,6 +28,9 @@ public class Manager : MonoBehaviour {
     }
 
     void Start () {
+        play = false;
+
+
         completeLineh = true;
         completeLinev = true;
         checkall = false;
@@ -42,6 +50,15 @@ public class Manager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if (play)
+        {
+            play = false;
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.clip = soundsFX[0];
+            audio.Play();
+        }
+
+        scoreText.text = score.ToString();
 
         //check if there are no block to play
         if (GameObject.FindGameObjectsWithTag("Block").Length == 0)
@@ -63,9 +80,9 @@ public class Manager : MonoBehaviour {
 
                  if (spaces[k].transform.childCount <= 0)
                  {
-
+                    //StartCoroutine(spacetime(k));
                      spaces[k].GetComponent<space>().empty = true;
-                 }
+                }
              }
              checkall = false;
         }
@@ -104,10 +121,15 @@ public class Manager : MonoBehaviour {
             }
             if (completeLinev)
             {
-                
+               
+
                 column = k;
                 Debug.Log("completa" + k);
+                playComplete();
+                score += 10;
                 //erase that line
+               // space.particlesvertical(column, spaces);
+
                 for (int j = 0; j < sizeVertical; j++)
                 {
 
@@ -116,8 +138,12 @@ public class Manager : MonoBehaviour {
                     {
                         GameObject.Destroy(child.gameObject);
                         //make that space usable again
-                      if(alone)
-                        spaces[column].GetComponent<space>().empty = true;
+                        if (alone)
+                        {
+                            // StartCoroutine(spacetime (column));
+                           
+                            spaces[column].GetComponent<space>().empty = true;
+                        }
                     }
                     column += sizeVertical;
                 }
@@ -149,8 +175,11 @@ public class Manager : MonoBehaviour {
             }
             if (completeLineh)
             {
-               // checkDown();
+                // checkDown();
+                score += 10;
                 Debug.Log("completa" + line);
+                playComplete();
+                // space.particles(line, spaces);
                 //erase that line
                 for (int j = line; j < line + sizeHorizontal; j++)
                 {
@@ -158,6 +187,7 @@ public class Manager : MonoBehaviour {
                     {
                      
                         GameObject.Destroy(child.gameObject);
+                       // StartCoroutine(spacetime(j));
                         spaces[j].GetComponent<space>().empty = true;
                         checkDown(false);
                         
@@ -187,7 +217,14 @@ public class Manager : MonoBehaviour {
 
     }
 
-    
+    void playComplete()
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.clip = soundsFX[1];
+        audio.Play();
+    }
+
+   
 
 }
 

@@ -11,11 +11,13 @@ public class move : MonoBehaviour {
     public GameObject spawnPlace;
     public GameObject[] respawns ;
     private int speed;
+    public AudioClip [] put;
 
 
 
     // Use this for initialization
     void Start() {
+     
         respawns = new GameObject[3];
         firstMove = true;
         perfectPlace = true;
@@ -47,7 +49,7 @@ public class move : MonoBehaviour {
 	void Update () {
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, spawnPlace.transform.position, step);
-
+        
         //make bigger and shorter the block
         if (Input.GetMouseButtonUp(0) && !perfectPlace)
         {
@@ -72,6 +74,9 @@ public class move : MonoBehaviour {
             {
                 Debug.Log("Something was clicked!");
                 hit.collider.transform.localScale = new Vector2(1f, 1f);
+                AudioSource audio = GetComponent<AudioSource>();
+                audio.clip = put[0];
+                audio.Play();
             }
 
            
@@ -84,7 +89,8 @@ public class move : MonoBehaviour {
 
             if (transform.childCount <= 0)
         {
-           
+            Manager.play = true;
+
             Debug.Log("huerfano");
             Destroy(gameObject);
         }

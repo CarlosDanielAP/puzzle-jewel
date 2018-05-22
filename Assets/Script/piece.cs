@@ -29,7 +29,7 @@ public class piece : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
-
+                
 
                 //check if all the pieces are in a perfect place
                 if (block.GetComponent<move>().perfectPlace)
@@ -49,6 +49,7 @@ public class piece : MonoBehaviour
                         Debug.Log("quieta");
                         //unparent of the block parent to the space an destroy block
                         transform.parent = null;
+                        transform.position = new Vector3(transform.position.x, transform.position.y, -1);
                         transform.SetParent(FindClosestSpacetoPiece(), true);
                         stay = true;
 
