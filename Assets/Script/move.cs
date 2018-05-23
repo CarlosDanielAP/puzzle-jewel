@@ -120,6 +120,7 @@ public class move : MonoBehaviour {
         {
             perfect = true;
             int myspace;
+            int myspaceh;
             for (int i = 0; i < pieces.Length; i++)
             {
               
@@ -127,79 +128,72 @@ public class move : MonoBehaviour {
                 {
 
                     myspace = pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece();
+                    myspaceh = pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece();
+
                     //Debug.Log("perfect" + myspace);
 
                     //  manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().empty = false;
                     manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().near = true;
-
+                    // Debug.Log("myspaaaaaice" + myspace);
                     for (int j = 0; j < 8; j++)
                     {
-                        if (myspace % 8 != 0)
+                        
+                        if (myspace > 7)
                         {
+                            myspace -= 8;
 
-                            myspace--;
-                            // firstspace = pieces[i].GetComponent<piece>().spaces[];
                         }
-                        else {
+                        if(myspace<=7)
+                            
+                        {
                             int cuenta = 0;
-                            for (int k = myspace; k <myspace+8; k++)
+                            int myspace2 = myspace;
+                            for (int k = 0; k < 8; k++)
                             {
-                               
-
-                                if (!manager.GetComponent<Manager>().spaces[k].GetComponent<space>().empty )
-                                {
-                                    cuenta++;
-                                  
-                                   
-                                    //Debug.Log("este no" + k);
-                                    //Debug.Log(pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece() + "popo" + k);
-                                   
-                                }
-                                if (manager.GetComponent<Manager>().spaces[k].GetComponent<space>().near)
+                                if (manager.GetComponent<Manager>().spaces[myspace2].GetComponent<space>().near)
                                 {
                                     cuenta++;
                                     
                                 }
-                                if (cuenta == 8) {
+                                if (!manager.GetComponent<Manager>().spaces[myspace2].GetComponent<space>().empty)
+                                {
+                                    cuenta++;
 
-                                    Debug.Log("KKKKKKKKKKKKKKKKK" + cuenta);
-                                    for (int l = myspace; l < myspace + 8; l++)
+                                }
+
+
+
+                               
+
+                                myspace2 += 8;
+                                if (cuenta == 8)
+                                {
+                                    for (int l = 0; l <  8; l++)
                                     {
 
-                                        if (!manager.GetComponent<Manager>().spaces[l].GetComponent<space>().empty)
+                                        if (!manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().empty)
                                         {
-                                            manager.GetComponent<Manager>().spaces[l].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite =
-                                                 sprites[0];
+                                            Sprite newcolor = pieces[0].transform.GetComponent<SpriteRenderer>().sprite;
+                                            manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite = newcolor;
+
                                         }
+                                        myspace += 8;
                                     }
                                 }
 
 
-                                /*
-                                
-                                    if (k== pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece())
-                                    {
-                                        Debug.Log("perfect" + myspace);
-                                    for( int l = myspace; l < myspace + 8; l++)
-                                        {
-
-                                        if (l != pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece())
-                                        {
-                                            manager.GetComponent<Manager>().spaces[l].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite =
-                                                 sprites[0];
-                                        }
-                                        }
-                                    }*/
-
                             }
+                           
 
-                          
 
                         }
-                        // Debug.Log("pppppppppppppppp" + firstspace);
+
                     }
-                    
-                    
+                   
+                  
+                    changeright(myspaceh);
+
+
 
                 }
                // else
@@ -226,6 +220,79 @@ public class move : MonoBehaviour {
             Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
             Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
             transform.position = objPosition;
+        }
+    }
+
+    void changeright(int myspace)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (myspace % 8 != 0)
+            {
+
+                myspace--;
+                // firstspace = pieces[i].GetComponent<piece>().spaces[];
+            }
+            else
+            {
+                int cuenta = 0;
+                for (int k = myspace; k < myspace + 8; k++)
+                {
+
+
+                    if (!manager.GetComponent<Manager>().spaces[k].GetComponent<space>().empty)
+                    {
+                        cuenta++;
+
+
+                        //Debug.Log("este no" + k);
+                        //Debug.Log(pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece() + "popo" + k);
+
+                    }
+                    if (manager.GetComponent<Manager>().spaces[k].GetComponent<space>().near)
+                    {
+                        cuenta++;
+
+                    }
+                    if (cuenta == 8)
+                    {
+
+                        Debug.Log("KKKKKKKKKKKKKKKKK" + cuenta);
+                        for (int l = myspace; l < myspace + 8; l++)
+                        {
+
+                            if (!manager.GetComponent<Manager>().spaces[l].GetComponent<space>().empty)
+                            {
+                                Sprite newcolor = pieces[0].transform.GetComponent<SpriteRenderer>().sprite;
+                                manager.GetComponent<Manager>().spaces[l].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite = newcolor;
+
+                            }
+                        }
+                    }
+
+
+                    /*
+
+                        if (k== pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece())
+                        {
+                            Debug.Log("perfect" + myspace);
+                        for( int l = myspace; l < myspace + 8; l++)
+                            {
+
+                            if (l != pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece())
+                            {
+                                manager.GetComponent<Manager>().spaces[l].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite =
+                                     sprites[0];
+                            }
+                            }
+                        }*/
+
+                }
+
+
+
+            }
+            // Debug.Log("pppppppppppppppp" + firstspace);
         }
     }
 }
