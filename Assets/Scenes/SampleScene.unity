@@ -2699,8 +2699,10 @@ MonoBehaviour:
   soundsFX:
   - {fileID: 8300000, guid: 09f7f759fc494294da4cad41200eae8a, type: 3}
   - {fileID: 8300000, guid: c4223b39e33a90b4d886ea2c2b6648df, type: 3}
+  - {fileID: 8300000, guid: df5ac1107992d0b44bd4c94083ea51c2, type: 3}
   scoreText: {fileID: 2146743978}
   score: 0
+  oldscore: 0
   sizeHorizontal: 8
   sizeVertical: 8
   spaces:
@@ -2797,7 +2799,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 09f7f759fc494294da4cad41200eae8a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.602
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -556,6 +556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1344902233705430}
   gameManager: {fileID: 0}
+  spaces: []
   nearPiece: 0
 --- !u!114 &114445824340558104
 MonoBehaviour:
@@ -570,6 +571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1344902233705430}
   gameManager: {fileID: 0}
+  spaces: []
   nearPiece: 0
 --- !u!114 &114468343500129180
 MonoBehaviour:
@@ -584,6 +586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1344902233705430}
   gameManager: {fileID: 0}
+  spaces: []
   nearPiece: 0
 --- !u!114 &114687872141547338
 MonoBehaviour:
@@ -603,11 +606,19 @@ MonoBehaviour:
   - {fileID: 1038736091984068}
   - {fileID: 1771479300852540}
   - {fileID: 1357971506806296}
+  manager: {fileID: 0}
   perfectPlace: 0
   spawnPlace: {fileID: 0}
   respawns: []
   put:
   - {fileID: 8300000, guid: d7893ff99a270e444b2a8ec5ad01aaa3, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 97bd8d26fc53f6f48b1659be827cbc11, type: 3}
+  - {fileID: 21300000, guid: 3eea96d9f9fc5fd47ab48d97ae9fb0a7, type: 3}
+  - {fileID: 21300000, guid: a450e0ecbe95b604a9d1a08ab6c044ff, type: 3}
+  - {fileID: 21300000, guid: 54fa2a75ef68724459d4bb09e85a5b97, type: 3}
+  - {fileID: 21300000, guid: 61795761f71ecb04d9b064e7cb39b48c, type: 3}
+  - {fileID: 21300000, guid: dea38e3888caa4b408b86ea6026bbc94, type: 3}
 --- !u!114 &114695055810414120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -621,6 +632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1344902233705430}
   gameManager: {fileID: 0}
+  spaces: []
   nearPiece: 0
 --- !u!114 &114751701828805220
 MonoBehaviour:
@@ -635,6 +647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1344902233705430}
   gameManager: {fileID: 0}
+  spaces: []
   nearPiece: 0
 --- !u!212 &212023564422968374
 SpriteRenderer:

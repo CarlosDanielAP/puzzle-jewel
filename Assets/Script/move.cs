@@ -7,21 +7,27 @@ public class move : MonoBehaviour {
     public bool firstMove;
     float distance = 9;
     public GameObject[] pieces;
+    public GameObject manager;
     public bool perfectPlace;
     public GameObject spawnPlace;
     public GameObject[] respawns ;
+   public static bool perfect;
     private int speed;
     public AudioClip [] put;
+    bool complete;
+    public Sprite[] sprites;
 
 
 
     // Use this for initialization
     void Start() {
-     
+        manager = GameObject.Find("Game Manager");
         respawns = new GameObject[3];
         firstMove = true;
         perfectPlace = true;
         transform.localScale = new Vector2(0.5f, 0.5f);
+        complete = false;
+        perfect = false;
 
 
        //find respawns zone to move the block if it isnt touched
@@ -47,6 +53,7 @@ public class move : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        perfect = false;
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, spawnPlace.transform.position, step);
         
@@ -111,8 +118,101 @@ public class move : MonoBehaviour {
 
         if (perfectPlace)
         {
-            Debug.Log("perfect");
+            perfect = true;
+            int myspace;
+            for (int i = 0; i < pieces.Length; i++)
+            {
+              
+                if (pieces[i].GetComponent<piece>().nearPiece)
+                {
+
+                    myspace = pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece();
+                    //Debug.Log("perfect" + myspace);
+
+                    //  manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().empty = false;
+                    manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().near = true;
+
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (myspace % 8 != 0)
+                        {
+
+                            myspace--;
+                            // firstspace = pieces[i].GetComponent<piece>().spaces[];
+                        }
+                        else {
+                            int cuenta = 0;
+                            for (int k = myspace; k <myspace+8; k++)
+                            {
+                               
+
+                                if (!manager.GetComponent<Manager>().spaces[k].GetComponent<space>().empty )
+                                {
+                                    cuenta++;
+                                  
+                                   
+                                    //Debug.Log("este no" + k);
+                                    //Debug.Log(pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece() + "popo" + k);
+                                   
+                                }
+                                if (manager.GetComponent<Manager>().spaces[k].GetComponent<space>().near)
+                                {
+                                    cuenta++;
+                                    
+                                }
+                                if (cuenta == 8) {
+
+                                    Debug.Log("KKKKKKKKKKKKKKKKK" + cuenta);
+                                    for (int l = myspace; l < myspace + 8; l++)
+                                    {
+
+                                        if (!manager.GetComponent<Manager>().spaces[l].GetComponent<space>().empty)
+                                        {
+                                            manager.GetComponent<Manager>().spaces[l].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite =
+                                                 sprites[0];
+                                        }
+                                    }
+                                }
+
+
+                                /*
+                                
+                                    if (k== pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece())
+                                    {
+                                        Debug.Log("perfect" + myspace);
+                                    for( int l = myspace; l < myspace + 8; l++)
+                                        {
+
+                                        if (l != pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece())
+                                        {
+                                            manager.GetComponent<Manager>().spaces[l].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite =
+                                                 sprites[0];
+                                        }
+                                        }
+                                    }*/
+
+                            }
+
+                          
+
+                        }
+                        // Debug.Log("pppppppppppppppp" + firstspace);
+                    }
+                    
+                    
+
+                }
+               // else
+               // manager.GetComponent<Manager>().spaces[pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece()].GetComponent<space>().near = false;
+                
+            }
+                   
+
         }
+    }
+
+    void neighboards() {
+        Debug.Log("helloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
     }
 
     void OnMouseDrag()

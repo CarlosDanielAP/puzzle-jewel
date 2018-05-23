@@ -403,6 +403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1631030143765348}
   gameManager: {fileID: 0}
+  spaces: []
   nearPiece: 0
 --- !u!114 &114144761895564010
 MonoBehaviour:
@@ -421,11 +422,19 @@ MonoBehaviour:
   - {fileID: 1055038439315004}
   - {fileID: 1536374600787586}
   - {fileID: 1089889969588826}
+  manager: {fileID: 0}
   perfectPlace: 0
   spawnPlace: {fileID: 0}
   respawns: []
   put:
   - {fileID: 8300000, guid: d7893ff99a270e444b2a8ec5ad01aaa3, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 97bd8d26fc53f6f48b1659be827cbc11, type: 3}
+  - {fileID: 21300000, guid: 3eea96d9f9fc5fd47ab48d97ae9fb0a7, type: 3}
+  - {fileID: 21300000, guid: a450e0ecbe95b604a9d1a08ab6c044ff, type: 3}
+  - {fileID: 21300000, guid: 54fa2a75ef68724459d4bb09e85a5b97, type: 3}
+  - {fileID: 21300000, guid: 61795761f71ecb04d9b064e7cb39b48c, type: 3}
+  - {fileID: 21300000, guid: dea38e3888caa4b408b86ea6026bbc94, type: 3}
 --- !u!114 &114295304653652610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -439,6 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1631030143765348}
   gameManager: {fileID: 0}
+  spaces: []
   nearPiece: 0
 --- !u!114 &114583137930762788
 MonoBehaviour:
@@ -453,6 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1631030143765348}
   gameManager: {fileID: 0}
+  spaces: []
   nearPiece: 0
 --- !u!114 &114637670670919852
 MonoBehaviour:
@@ -467,6 +478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 1631030143765348}
   gameManager: {fileID: 0}
+  spaces: []
   nearPiece: 0
 --- !u!212 &212058104587425982
 SpriteRenderer:

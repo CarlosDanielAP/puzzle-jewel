@@ -7,13 +7,17 @@ public class piece : MonoBehaviour
 
     public GameObject block;
     public GameObject gameManager;
-    private Transform[] spaces;
+    public Transform[] spaces;
     public bool nearPiece;
     private Transform ClosestSpace;
     private bool stay;
+    Sprite myprite;
+    int myspace;
 
     void Start()
     {
+        myprite = transform.GetComponent<SpriteRenderer>().sprite;
+
         gameManager = GameObject.Find("Game Manager");
         nearPiece = false;
         spaces = gameManager.GetComponent<Manager>().spaces;
@@ -22,6 +26,11 @@ public class piece : MonoBehaviour
 
     void Update()
     {
+        if (!move.perfect)
+        {
+            transform.GetComponent<SpriteRenderer>().sprite = myprite;
+        }
+
         if (!stay)
         {
             FindClosestSpacetoPiece();
@@ -115,5 +124,35 @@ public class piece : MonoBehaviour
         }
         
         return ClosestSpace;
+    }
+
+    public int FindClosestSpacenumbertoPiece()
+    {
+        float less = 0.1f;
+        float dist;
+       
+        for(int i =0;i<spaces.Length;i++)
+        {
+            dist = Vector2.Distance(spaces[i].position, transform.position);
+            if (dist < less)
+            {
+                less = dist;
+                myspace = i;
+                //check if it is a free space
+                if (spaces[i].GetComponent<space>().empty)
+                    nearPiece = true;
+
+            }
+
+
+            if (less >= 0.1)
+            {
+                ClosestSpace = null;
+                nearPiece = false;
+            }
+        }
+
+            return myspace;
+   
     }
 }

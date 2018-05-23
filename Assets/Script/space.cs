@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class space : MonoBehaviour {
     public bool empty;
-    public static bool emit;
+    public  bool near;
     ParticleSystem myparticles;
     public GameObject manager;
     static public space instance;
     bool pause;
-    int lines;
+    public int lines;
+    public Transform child;
 
     void Awake()
     {
@@ -18,7 +19,7 @@ public class space : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
+        near = false;
         empty = true;
     
 
@@ -26,7 +27,16 @@ public class space : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (transform.childCount > 0)
+        {
+            child = transform.GetChild(0);
+            
+        }
 
+        if (!move.perfect)
+        {
+            near = false;
+        }
       /*  if (manager.GetComponent<Manager>().completeLineh)
         {
                
