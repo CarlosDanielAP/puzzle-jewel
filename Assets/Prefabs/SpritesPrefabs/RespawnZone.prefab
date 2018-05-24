@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267711043913394}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: -1.5366801}
+  m_LocalPosition: {x: -2.5, y: 0, z: -1.5366801}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,10 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocks:
-  - {fileID: 4322940480716790, guid: c8968a9f5ef83e34a84be1c049f3a487, type: 2}
-  - {fileID: 4872217040961798, guid: 491dad57649c01e4e9251684bf2287e5, type: 2}
-  - {fileID: 4854675634576188, guid: 2b7be6e0bf956c14fb7c7df3fc3e59e3, type: 2}
-  - {fileID: 4565909981463044, guid: 99c066766c6b74c4e807d64e1665c0e0, type: 2}
-  - {fileID: 4367363324870954, guid: 87dbab21b7b30e4429a085020d745652, type: 2}
-  - {fileID: 4893180983847268, guid: c6473a3032f7ea5499693936ba97b725, type: 2}
-  - {fileID: 4793956501586500, guid: 953f261c1ef8051499088ac08c1a1348, type: 2}
+  - {fileID: 4827442973858744, guid: a4fb279f587c3df468c763a19f7b4a44, type: 2}
+  myblockname: 
+  manager: {fileID: 0}

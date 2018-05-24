@@ -11,6 +11,7 @@ public class space : MonoBehaviour {
     bool pause;
     public int lines;
     public Transform child;
+    public Animator m_Animator;
 
     void Awake()
     {
@@ -21,7 +22,8 @@ public class space : MonoBehaviour {
     void Start () {
         near = false;
         empty = true;
-    
+        m_Animator = gameObject.GetComponent<Animator>();
+
 
     }
 	

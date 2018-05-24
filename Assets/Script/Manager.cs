@@ -7,29 +7,31 @@ public class Manager : MonoBehaviour {
     public AudioClip[] soundsFX;
     public static bool play;
     public Text scoreText;
-    public  int score;
+    public int score;
     public int oldscore;
     public int sizeHorizontal;
     public int sizeVertical;
-    public Transform []spaces;
+    public Transform[] spaces;
+    public static Transform[] myspaces;
     public Transform[] Horizontals;
     public bool completeLineh;
     public bool completeLinev;
     public bool checkall;
     public static bool noblocks;
-   public  int line;
+    public int line;
     AudioSource audio;
     int column;
     // Use this for initialization
     void Awake()
     {
         spaces = new Transform[sizeHorizontal * sizeVertical];
-       
+        myspaces = new Transform[sizeHorizontal * sizeVertical];
 
-      
+
+
     }
 
-    void Start () {
+    void Start() {
         play = false;
 
         audio = GetComponent<AudioSource>();
@@ -44,20 +46,21 @@ public class Manager : MonoBehaviour {
         {
             //add all the spaces
             spaces[i] = GameObject.Find("space (" + i + ")").transform;
-            
+            myspaces[i] = spaces[i];
             
         }
+        
 
-     
 
-        }
+    }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
+       // loose();
         if (score > oldscore)
         {
             playComplete();
-            oldscore+=10;
+            oldscore += 10;
         }
 
         if (play)
@@ -81,22 +84,22 @@ public class Manager : MonoBehaviour {
         }
 
 
-            if (checkall)
+        if (checkall)
         {
             Debug.Log("scanning");
-             for (int k = 0; k < spaces.Length; k++)
-             {
+            for (int k = 0; k < spaces.Length; k++)
+            {
 
 
-                 if (spaces[k].transform.childCount <= 0)
-                 {
+                if (spaces[k].transform.childCount <= 0)
+                {
                     //StartCoroutine(spacetime(k));
-                     spaces[k].GetComponent<space>().empty = true;
+                    spaces[k].GetComponent<space>().empty = true;
                 }
-             }
-             checkall = false;
+            }
+            checkall = false;
         }
-        
+
         else
         {
             for (int i = 0; i < 8; i++)
@@ -107,12 +110,12 @@ public class Manager : MonoBehaviour {
         }
 
 
-            
+
 
     }
     void checkDown(bool alone)
     {
-        
+
         for (int k = 0; k < sizeHorizontal; k++)
         {
 
@@ -125,7 +128,7 @@ public class Manager : MonoBehaviour {
                 if (spaces[column].GetComponent<space>().empty)
                 {
                     completeLinev = false;
-                   
+
                     break;
 
                 }
@@ -134,14 +137,14 @@ public class Manager : MonoBehaviour {
             if (completeLinev)
             {
 
-               // playComplete();
+                // playComplete();
 
                 column = k;
                 Debug.Log("completa" + k);
-                
+
                 score += 10;
                 //erase that line
-               // space.particlesvertical(column, spaces);
+                // space.particlesvertical(column, spaces);
 
                 for (int j = 0; j < sizeVertical; j++)
                 {
@@ -154,19 +157,19 @@ public class Manager : MonoBehaviour {
                         if (alone)
                         {
                             // StartCoroutine(spacetime (column));
-                           
+
                             spaces[column].GetComponent<space>().empty = true;
                         }
                     }
                     column += sizeVertical;
                 }
-               // playComplete();
+                // playComplete();
                 break;
             }
 
 
         }
-        
+
 
     }
     void checkRight() {
@@ -189,56 +192,68 @@ public class Manager : MonoBehaviour {
             if (completeLineh)
             {
 
-               // playComplete();
+                // playComplete();
 
                 // checkDown();
                 score += 10;
                 Debug.Log("completa" + line);
-              
+                //play animation
+
                 // space.particles(line, spaces);
                 //erase that line
                 for (int j = line; j < line + sizeHorizontal; j++)
                 {
                     foreach (Transform child in spaces[j].transform)
                     {
-                     
+                        //
+                        //spaces[j].GetComponent<space>().m_Animator.SetTrigger("Blue");
+
                         GameObject.Destroy(child.gameObject);
-                       // StartCoroutine(spacetime(j));
+                        // StartCoroutine(spacetime(j));
                         spaces[j].GetComponent<space>().empty = true;
                         checkDown(false);
-                        
-                      
+                        spaces[j].GetComponent<space>().m_Animator.SetTrigger("Blue");
+                        //playComplete();
                     }
                 }
-               // playComplete();
+
 
                 break;
 
-               
+
             }
 
 
-           
+
 
         }
-        
+
 
         if (!completeLineh)
         {
             checkDown(true);
         }
 
-       
+
 
 
     }
 
     void playComplete()
     {
-       // AudioSource audio = GetComponent<AudioSource>();
+        // AudioSource audio = GetComponent<AudioSource>();
+        Debug.Log("audioooooooooooooooooooooooooooooo");
         audio.Stop();
-        audio.clip = soundsFX[1];
-        audio.Play();
+        audio.PlayOneShot(soundsFX[1]);
+
+    }
+
+    void loose(){
+       
+      
+
+        
+
     }
 
    
