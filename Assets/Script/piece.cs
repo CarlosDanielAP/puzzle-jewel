@@ -55,6 +55,7 @@ public class piece : MonoBehaviour
 
                         //cant move that block any more
                         block.GetComponent<move>().firstMove = false;
+                        block.GetComponent<move>().spawnPlace.GetComponent<Respawn>().myblockname = null;
                         Debug.Log("quieta");
                         //unparent of the block parent to the space an destroy block
                         transform.parent = null;

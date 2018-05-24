@@ -6,7 +6,8 @@ public class Respawn : MonoBehaviour {
     public Transform[] blocks;
     public string myblockname;
     public GameObject manager;
-    bool freeSpace;
+   public bool freeSpace;
+    public bool nonboardspace;
     int[] mid;
     int[] HrzFive;
     int[] HrzL;
@@ -23,6 +24,7 @@ public class Respawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        nonboardspace = false;
         if (Manager.noblocks)
         {
             myblockname = Instantiate(blocks[Random.Range(0, blocks.Length)], new Vector2(transform.position.x, transform.position.y), transform.rotation).name;
@@ -81,7 +83,8 @@ public class Respawn : MonoBehaviour {
                 {
                     for (int j = 0; j < _mid.Length; j++)
                     {
-                       _mid[j]++; Debug.Log("no hay no existe" + _mid[j]);
+                    _mid[j]++; 
+                   // Debug.Log("no hay no existe" + _mid[j]);
                     }
                    
 
@@ -91,7 +94,9 @@ public class Respawn : MonoBehaviour {
             }
             else
             {
-                Debug.Log("no hay no existe");
+            Debug.Log("no hay no existe");
+            nonboardspace = true;
+               // Debug.Log("no hay no existe");
             }
 
            

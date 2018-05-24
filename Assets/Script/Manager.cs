@@ -19,7 +19,9 @@ public class Manager : MonoBehaviour {
     public bool checkall;
     public static bool noblocks;
     public int line;
+    public GameObject[] respawns;
     AudioSource audio;
+    public int respawnCount;
     int column;
     // Use this for initialization
     void Awake()
@@ -109,6 +111,25 @@ public class Manager : MonoBehaviour {
             checkall = true;
         }
 
+
+        for(int i=0; i < respawns.Length; i++)
+        {
+            respawnCount = 0;
+            int freespaces = 0;
+            if (respawns[i].GetComponent<Respawn>().myblockname!=null)
+            {
+                Debug.Log(respawns[i].GetComponent<Respawn>().myblockname);
+                respawnCount++;
+                if (!respawns[i].GetComponent<Respawn>().freeSpace){
+                    freespaces++;
+                }
+                if (freespaces >= respawnCount)
+                {
+                    Debug.Log("perdiste");
+                }
+            }
+           
+        }
 
 
 
