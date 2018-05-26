@@ -22,6 +22,7 @@ public class Manager : MonoBehaviour {
     public GameObject[] respawns;
     AudioSource audio;
     public int respawnCount;
+    public bool perdiste;
     int column;
     // Use this for initialization
     void Awake()
@@ -35,7 +36,7 @@ public class Manager : MonoBehaviour {
 
     void Start() {
         play = false;
-
+        perdiste = false;
         audio = GetComponent<AudioSource>();
         audio.clip = soundsFX[2];
         audio.Play();
@@ -63,6 +64,10 @@ public class Manager : MonoBehaviour {
         {
             playComplete();
             oldscore += 10;
+          for(int i = 0; i < respawns.Length; i++)
+            {
+               // respawns[i].GetComponent<Respawn>().save=true;
+            }
         }
 
         if (play)
@@ -111,21 +116,24 @@ public class Manager : MonoBehaviour {
             checkall = true;
         }
 
-
-        for(int i=0; i < respawns.Length; i++)
+        respawnCount = 0;
+        int freespaces = 0;
+        for (int i=0; i < respawns.Length; i++)
         {
-            respawnCount = 0;
-            int freespaces = 0;
+            
+           
             if (respawns[i].GetComponent<Respawn>().myblockname!=null)
             {
                 Debug.Log(respawns[i].GetComponent<Respawn>().myblockname);
                 respawnCount++;
-                if (!respawns[i].GetComponent<Respawn>().freeSpace){
+                if (respawns[i].GetComponent<Respawn>().nonboardspace){
                     freespaces++;
                 }
-                if (freespaces >= respawnCount)
+                if (freespaces == respawnCount)
                 {
                     Debug.Log("perdiste");
+                    perdiste = true;
+                   // Application.LoadLevel("SampleScene");
                 }
             }
            

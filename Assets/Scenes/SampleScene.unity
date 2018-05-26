@@ -4648,6 +4648,8 @@ MonoBehaviour:
   - {fileID: 1022075663}
   - {fileID: 2134742530}
   - {fileID: 2111307811}
+  respawnCount: 0
+  perdiste: 0
 --- !u!4 &895931972
 Transform:
   m_ObjectHideFlags: 0
@@ -6801,7 +6803,7 @@ Prefab:
     - target: {fileID: 114070208191724304, guid: df198e9e6c93c8f49a7bb9de0e642d95,
         type: 2}
       propertyPath: blocks.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4681380009077218, guid: df198e9e6c93c8f49a7bb9de0e642d95, type: 2}
       propertyPath: m_LocalPosition.x
@@ -6879,7 +6881,7 @@ Prefab:
         type: 2}
       propertyPath: blocks.Array.data[0]
       value: 
-      objectReference: {fileID: 4827442973858744, guid: a4fb279f587c3df468c763a19f7b4a44,
+      objectReference: {fileID: 4565909981463044, guid: 99c066766c6b74c4e807d64e1665c0e0,
         type: 2}
     - target: {fileID: 114070208191724304, guid: df198e9e6c93c8f49a7bb9de0e642d95,
         type: 2}
@@ -9477,7 +9479,7 @@ Prefab:
     - target: {fileID: 114070208191724304, guid: df198e9e6c93c8f49a7bb9de0e642d95,
         type: 2}
       propertyPath: blocks.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4681380009077218, guid: df198e9e6c93c8f49a7bb9de0e642d95, type: 2}
       propertyPath: m_LocalPosition.x
@@ -9515,7 +9517,7 @@ Prefab:
         type: 2}
       propertyPath: blocks.Array.data[0]
       value: 
-      objectReference: {fileID: 4827442973858744, guid: a4fb279f587c3df468c763a19f7b4a44,
+      objectReference: {fileID: 4565909981463044, guid: 99c066766c6b74c4e807d64e1665c0e0,
         type: 2}
     - target: {fileID: 114070208191724304, guid: df198e9e6c93c8f49a7bb9de0e642d95,
         type: 2}
@@ -10119,7 +10121,7 @@ Prefab:
     - target: {fileID: 114070208191724304, guid: df198e9e6c93c8f49a7bb9de0e642d95,
         type: 2}
       propertyPath: blocks.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4681380009077218, guid: df198e9e6c93c8f49a7bb9de0e642d95, type: 2}
       propertyPath: m_LocalPosition.x
@@ -10197,7 +10199,7 @@ Prefab:
         type: 2}
       propertyPath: blocks.Array.data[0]
       value: 
-      objectReference: {fileID: 4827442973858744, guid: a4fb279f587c3df468c763a19f7b4a44,
+      objectReference: {fileID: 4565909981463044, guid: 99c066766c6b74c4e807d64e1665c0e0,
         type: 2}
     - target: {fileID: 114070208191724304, guid: df198e9e6c93c8f49a7bb9de0e642d95,
         type: 2}
