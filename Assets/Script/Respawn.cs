@@ -47,19 +47,21 @@ public class Respawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Manager.noblocks)
+        {
+            // reset();
+            myblockname = Instantiate(blocks[Random.Range(0, blocks.Length)], new Vector2(transform.position.x, transform.position.y), transform.rotation).name;
+
+        }
         if (myblockname == null)
         {
           // reset();
         }
         freeSpace = true;
-        nonboardspace = false;
+       // nonboardspace = false;
 
-        if (Manager.noblocks)
-        {
-           // reset();
-            myblockname = Instantiate(blocks[Random.Range(0, blocks.Length)], new Vector2(transform.position.x, transform.position.y), transform.rotation).name;
-
-        }
+       
 
 
       /*  if (myblockname == "MidSquare(Clone)" || myblockname == "MidSquare 1(Clone)")
@@ -118,7 +120,10 @@ public class Respawn : MonoBehaviour
            // Debug.Log(saveCorner);
 
             arraylength = Square.Length;
-            Check(arraylength, Square);
+            if (nonboardspace ==false)
+            {
+                Check(arraylength, Square);
+            }
            
            
         }
@@ -127,33 +132,32 @@ public class Respawn : MonoBehaviour
 
     }
 
-    void Check(int _arraylenght, int[] _mid)
+   public void Check(int _arraylenght, int[] _mid)
     {
 
-      
 
-        
-       
-            if (_mid[_arraylenght-1] <= Manager.myspaces.Length)
-        {
 
-            if (cornerBlock> ( fila + 8)-cornerSave)
+
+
+     
+
+            if (cornerBlock > (fila + 8) - cornerSave)
             {
-               // reset();
+                // reset();
                 fila += 8;
-                cornerBlock = cornerSave+fila;
+                cornerBlock = cornerSave + fila;
                 for (int i = 0; i < _mid.Length; i++)
                 {
                     _mid[i] = saveBlock[i] + fila;
                 }
-              
+
 
             }
 
             for (int n = cornerBlock; n < fila + 8; n++)
             {
 
-                Debug.Log(cornerBlock + "hora" + cornerSave + "fila" + fila+"mi esquina"+_mid[1]+"cuadrito guardado"+saveBlock[1]);
+                Debug.Log(cornerBlock + "hora" + cornerSave + "fila" + fila + "mi esquina" + _mid[1] + "cuadrito guardado" + saveBlock[1]);
 
                 for (int i = 0; i < _mid.Length; i++)
                 {
@@ -166,7 +170,8 @@ public class Respawn : MonoBehaviour
                         freeSpace = true;
                     }
 
-                    else {
+                    else
+                    {
 
                         break;
                     }
@@ -174,6 +179,8 @@ public class Respawn : MonoBehaviour
 
                 }
                 if (!freeSpace)
+                {
+                if (_mid[_arraylenght - 1] < Manager.myspaces.Length)
                 {
                     cornerBlock++;
                     for (int j = 0; j < _mid.Length; j++)
@@ -184,7 +191,8 @@ public class Respawn : MonoBehaviour
                     }
                     Check(_arraylenght, _mid);
                     break;
-
+                }
+                else break;
                 }
 
                 if (freeSpace)
@@ -192,11 +200,22 @@ public class Respawn : MonoBehaviour
                     break;
                 }
             }
-        }
+            if (_mid[_arraylenght - 1] > Manager.myspaces.Length)
+            {
+                Debug.Log("perdiste");
+                nonboardspace = true;
+               
+            }
+        
+       
     }
+
+    
 
             public void reset()
     {
+
+       
         //fila = 0;
         //cornerB = 0;
         mid = new int[] { 0, 1, 2, 8, 9, 10, 16, 17, 18 };
@@ -207,7 +226,8 @@ public class Respawn : MonoBehaviour
         cornerHzFive = new int[] { 4,0 };
         cornerHrzL = new int[] { 2,0 };
         cornerSquare = new int[] { 1,0 };
-       // save = true;
+        nonboardspace = false;
+        save = true;
     }
 }
 

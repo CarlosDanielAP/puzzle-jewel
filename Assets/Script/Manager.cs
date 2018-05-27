@@ -60,15 +60,10 @@ public class Manager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
        // loose();
-        if (score > oldscore)
-        {
-            playComplete();
-            oldscore += 10;
-          for(int i = 0; i < respawns.Length; i++)
-            {
-               // respawns[i].GetComponent<Respawn>().save=true;
-            }
-        }
+       
+        
+
+       
 
         if (play)
         {
@@ -104,6 +99,9 @@ public class Manager : MonoBehaviour {
                     spaces[k].GetComponent<space>().empty = true;
                 }
             }
+
+            
+
             checkall = false;
         }
 
@@ -113,30 +111,53 @@ public class Manager : MonoBehaviour {
             {
                 checkRight();
             }
+
+
+          
+
             checkall = true;
         }
 
-        respawnCount = 0;
-        int freespaces = 0;
-        for (int i=0; i < respawns.Length; i++)
+      
+ if (score > oldscore)
         {
-            
-           
-            if (respawns[i].GetComponent<Respawn>().myblockname!=null)
+            playComplete();
+            oldscore += 10;
+          for(int i = 0; i < respawns.Length; i++)
             {
-                Debug.Log(respawns[i].GetComponent<Respawn>().myblockname);
-                respawnCount++;
-                if (respawns[i].GetComponent<Respawn>().nonboardspace){
-                    freespaces++;
-                }
-                if (freespaces == respawnCount)
-                {
-                    Debug.Log("perdiste");
-                    perdiste = true;
-                   // Application.LoadLevel("SampleScene");
-                }
+                respawns[i].GetComponent<Respawn>().reset();
+                
             }
-           
+
+        }
+
+        else
+        {
+            respawnCount = 0;
+            int freespaces = 0;
+
+
+            for (int i = 0; i < respawns.Length; i++)
+            {
+
+
+                if (respawns[i].GetComponent<Respawn>().myblockname != null)
+                {
+                    Debug.Log(respawns[i].GetComponent<Respawn>().myblockname);
+                    respawnCount++;
+                    if (respawns[i].GetComponent<Respawn>().nonboardspace)
+                    {
+                        freespaces++;
+                    }
+                    if (freespaces == respawnCount)
+                    {
+                        Debug.Log("perdistessssssssssssssssssssssssssss" + freespaces + "  " + respawnCount);
+                        perdiste = true;
+                        Application.LoadLevel("SampleScene");
+                    }
+                }
+
+            }
         }
 
 
@@ -272,6 +293,7 @@ public class Manager : MonoBehaviour {
     {
         // AudioSource audio = GetComponent<AudioSource>();
         Debug.Log("audioooooooooooooooooooooooooooooo");
+        perdiste = false;
         audio.Stop();
         audio.PlayOneShot(soundsFX[1]);
 
