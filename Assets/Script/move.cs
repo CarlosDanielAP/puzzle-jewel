@@ -16,6 +16,7 @@ public class move : MonoBehaviour {
     public AudioClip [] put;
     bool complete;
     public Sprite[] sprites;
+    static public string colorname;
 
 
 
@@ -174,6 +175,7 @@ public class move : MonoBehaviour {
                                         if (!manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().empty)
                                         {
                                             Sprite newcolor = pieces[0].transform.GetComponent<SpriteRenderer>().sprite;
+                                            colorname = newcolor.name;
                                             manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite = newcolor;
 
                                         }
@@ -264,6 +266,7 @@ public class move : MonoBehaviour {
                             if (!manager.GetComponent<Manager>().spaces[l].GetComponent<space>().empty)
                             {
                                 Sprite newcolor = pieces[0].transform.GetComponent<SpriteRenderer>().sprite;
+                                colorname = newcolor.name;
                                 manager.GetComponent<Manager>().spaces[l].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite = newcolor;
 
                             }

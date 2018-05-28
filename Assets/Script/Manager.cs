@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Manager : MonoBehaviour {
+    public Texture[] textures;
     public Canvas canvas;
     public AudioClip[] soundsFX;
     public static bool play;
     public Text scoreText;
+    public Text bestText;
     public int score;
     public int oldscore;
     public int sizeHorizontal;
@@ -36,7 +38,7 @@ public class Manager : MonoBehaviour {
     }
 
     void Start() {
-       
+       bestText.text= PlayerPrefs.GetInt("Best").ToString();
         play = false;
         perdiste = false;
         audio = GetComponent<AudioSource>();
@@ -295,7 +297,7 @@ public class Manager : MonoBehaviour {
     IEnumerator losttime()
     {
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.01f);
 
         respawnCount = 0;
         int freespaces = 0;
@@ -322,7 +324,8 @@ public class Manager : MonoBehaviour {
         {
             Debug.Log("perdistessssssssssssssssssssssssssss" + freespaces + "  " + respawnCount);
             perdiste = true;
-            //Application.LoadLevel("SampleScene");
+            PlayerPrefs.SetInt("Score", score);
+            Application.LoadLevel("Score");
         }
 
 
@@ -335,6 +338,8 @@ public class Manager : MonoBehaviour {
         {
             for (int i = startline; i < startline + 8; i++)
             {
+                Debug.Log(move.colorname);
+                spaces[i].GetComponent<space>().GetComponent<ParticleSystemRenderer>().material.mainTexture = Resources.Load(move.colorname) as Texture;
                 spaces[i].GetComponent<space>().GetComponent<ParticleSystem>().Play();
             }
         }
@@ -343,13 +348,37 @@ public class Manager : MonoBehaviour {
             int k = startline;
             for (int i = startline; i < 8; i++)
             {
-                
+                Debug.Log(move.colorname);
+                spaces[k].GetComponent<space>().GetComponent<ParticleSystemRenderer>().material.mainTexture = Resources.Load(move.colorname) as Texture;
                 spaces[k].GetComponent<space>().GetComponent<ParticleSystem>().Play();
                 k += 8;
             }
         }
         
         canvas.GetComponent<AudioSource>().Play();
+
+    }
+
+    public void pauseGame()
+    {
+        Animator m_Animator;
+
+        m_Animator = canvas.GetComponent<Animator>();
+
+
+        if (!m_Animator.GetBool("pause")) {
+            m_Animator.SetBool("pause", true); 
+        }
+
+        else
+        {
+            m_Animator.SetBool("pause", false);
+
+        }
+    }
+    public void restart()
+    {
+        Application.LoadLevel("Game");
 
     }
 

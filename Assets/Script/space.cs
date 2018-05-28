@@ -21,7 +21,7 @@ public class space : MonoBehaviour {
     // Use this for initialization
     void Start () {
         near = false;
-        empty = true;
+      // empty = false;
         m_Animator = gameObject.GetComponent<Animator>();
 
 
@@ -32,6 +32,7 @@ public class space : MonoBehaviour {
         if (transform.childCount > 0)
         {
             child = transform.GetChild(0);
+            empty = false;
             
         }
 
