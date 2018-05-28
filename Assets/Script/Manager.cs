@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Manager : MonoBehaviour {
+    public Canvas canvas;
     public AudioClip[] soundsFX;
     public static bool play;
     public Text scoreText;
@@ -35,6 +36,7 @@ public class Manager : MonoBehaviour {
     }
 
     void Start() {
+       
         play = false;
         perdiste = false;
         audio = GetComponent<AudioSource>();
@@ -52,8 +54,8 @@ public class Manager : MonoBehaviour {
             myspaces[i] = spaces[i];
             
         }
-        
 
+        
 
     }
 
@@ -121,7 +123,8 @@ public class Manager : MonoBehaviour {
       
  if (score > oldscore)
         {
-            playComplete();
+          
+            // playComplete();
             oldscore += 10;
           for(int i = 0; i < respawns.Length; i++)
             {
@@ -172,6 +175,7 @@ public class Manager : MonoBehaviour {
                 Debug.Log("completa" + k);
 
                 score += 10;
+                Particleplay(k, false);
                 //erase that line
                 // space.particlesvertical(column, spaces);
 
@@ -226,6 +230,7 @@ public class Manager : MonoBehaviour {
                 // checkDown();
                 score += 10;
                 Debug.Log("completa" + line);
+                Particleplay(line,true);
                 //play animation
 
                 // space.particles(line, spaces);
@@ -241,7 +246,7 @@ public class Manager : MonoBehaviour {
                         // StartCoroutine(spacetime(j));
                         spaces[j].GetComponent<space>().empty = true;
                         checkDown(false);
-                        spaces[j].GetComponent<space>().m_Animator.SetTrigger("Blue");
+                        //spaces[j].GetComponent<space>().m_Animator.SetTrigger("Blue");
                         //playComplete();
                     }
                 }
@@ -273,7 +278,7 @@ public class Manager : MonoBehaviour {
         // AudioSource audio = GetComponent<AudioSource>();
         Debug.Log("audioooooooooooooooooooooooooooooo");
         perdiste = false;
-        audio.Stop();
+       // audio.Stop();
         audio.PlayOneShot(soundsFX[1]);
 
     }
@@ -323,6 +328,30 @@ public class Manager : MonoBehaviour {
 
     }
 
+    void Particleplay(int startline,bool right)
+    {
+        Debug.Log("audioooooooooooooooooooooooooooooo");
+        if (right)
+        {
+            for (int i = startline; i < startline + 8; i++)
+            {
+                spaces[i].GetComponent<space>().GetComponent<ParticleSystem>().Play();
+            }
+        }
+
+        if (!right) {
+            int k = startline;
+            for (int i = startline; i < 8; i++)
+            {
+                
+                spaces[k].GetComponent<space>().GetComponent<ParticleSystem>().Play();
+                k += 8;
+            }
+        }
+        
+        canvas.GetComponent<AudioSource>().Play();
+
+    }
 
 }
 
