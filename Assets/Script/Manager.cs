@@ -131,33 +131,12 @@ public class Manager : MonoBehaviour {
 
         }
 
-        else
+        else 
+
+       
         {
-            respawnCount = 0;
-            int freespaces = 0;
-
-
-            for (int i = 0; i < respawns.Length; i++)
-            {
-
-
-                if (respawns[i].GetComponent<Respawn>().myblockname != null)
-                {
-                    Debug.Log(respawns[i].GetComponent<Respawn>().myblockname);
-                    respawnCount++;
-                    if (respawns[i].GetComponent<Respawn>().nonboardspace)
-                    {
-                        freespaces++;
-                    }
-                    if (freespaces == respawnCount)
-                    {
-                        Debug.Log("perdistessssssssssssssssssssssssssss" + freespaces + "  " + respawnCount);
-                        perdiste = true;
-                        Application.LoadLevel("SampleScene");
-                    }
-                }
-
-            }
+        
+            StartCoroutine(losttime());
         }
 
 
@@ -307,7 +286,43 @@ public class Manager : MonoBehaviour {
 
     }
 
-   
+
+    IEnumerator losttime()
+    {
+        
+        yield return new WaitForSeconds(1f);
+
+        respawnCount = 0;
+        int freespaces = 0;
+
+
+        for (int i = 0; i < respawns.Length; i++)
+        {
+
+
+            if (respawns[i].GetComponent<Respawn>().myblockname != null)
+            {
+                Debug.Log(respawns[i].GetComponent<Respawn>().myblockname);
+                respawnCount++;
+                if (respawns[i].GetComponent<Respawn>().nonboardspace)
+                {
+                    freespaces++;
+                }
+            }
+                
+              
+
+        }
+        if (freespaces>0&&freespaces == respawnCount)
+        {
+            Debug.Log("perdistessssssssssssssssssssssssssss" + freespaces + "  " + respawnCount);
+            perdiste = true;
+            //Application.LoadLevel("SampleScene");
+        }
+
+
+    }
+
 
 }
 
