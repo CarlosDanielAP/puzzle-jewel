@@ -15,10 +15,9 @@ public class Respawn : MonoBehaviour
     public int[] HrzFive;
     public int[] HrzL;
     public int[] Square;
-    public int[] cornermid;
-    public int[] cornerHzFive;
-    public int[] cornerHrzL;
-    public int[] cornerSquare;
+    public int[] Three;
+    public int[] Single;
+    public int[] UpCorner;
     public int arraylength;
     private int fila;
     int cornerBlock;
@@ -35,10 +34,9 @@ public class Respawn : MonoBehaviour
         HrzFive = new int[] { 0, 1, 2, 3, 4 };
         HrzL = new int[] { 0, 8, 9, 10 };
         Square = new int[] { 0, 1, 8, 9 };
-        cornermid = new int[] { 2,0 };
-        cornerHzFive = new int[] { 4,0 };
-        cornerHrzL = new int[] { 2,0 };
-        cornerSquare = new int[] {1,0};
+        Three = new int[] { 0,1,2};
+        Single = new int[] { 0 };
+        UpCorner = new int[] { 0 ,1,2,10,18};
         cornerBlock = 1;
       
         
@@ -59,12 +57,76 @@ public class Respawn : MonoBehaviour
           // reset();
         }
         freeSpace = true;
-       // nonboardspace = false;
+        // nonboardspace = false;
+        if (myblockname == "UpCorner(Clone)" || myblockname == "UpCorner 1(Clone)")
+        {
+            {
+                if (save == true)
+                {
+                    fila = 0;
+                    cornerBlock = 2;
+                    cornerSave = 2;
+                    saveBlock = new int[] { 0, 1, 2, 10, 18 };
+                    save = false;
+                }
 
-       
+                arraylength = UpCorner.Length;
+                if (nonboardspace == false)
+                {
+                    Check(arraylength, UpCorner);
+                }
 
 
-       if (myblockname == "MidSquare(Clone)" || myblockname == "MidSquare 1(Clone)")
+            }
+        }
+
+        if (myblockname == "tree(Clone)" || myblockname == "tree 1(Clone)")
+        {
+            {
+                if (save == true)
+                {
+                    fila = 0;
+                    cornerBlock = 2;
+                    cornerSave = 2;
+                    saveBlock = new int[] { 0, 1, 2 };
+                    save = false;
+                }
+
+                arraylength = Three.Length;
+                if (nonboardspace == false)
+                {
+                    Check(arraylength, Three);
+                }
+
+
+            }
+        }
+
+        if (myblockname == "Single(Clone)" || myblockname == "Single 1(Clone)")
+        {
+            {
+                if (save == true)
+                {
+                    fila = 0;
+                    cornerBlock = 0;
+                    cornerSave = 0;
+                    saveBlock = new int[] { 0};
+                    save = false;
+                }
+
+                arraylength = Single.Length;
+                if (nonboardspace == false)
+                {
+                    Check(arraylength, Single);
+                }
+
+
+            }
+        }
+
+
+
+        if (myblockname == "MidSquare(Clone)" || myblockname == "MidSquare 1(Clone)")
         {
             {
                 if (save == true)
@@ -249,10 +311,10 @@ public class Respawn : MonoBehaviour
         HrzFive = new int[] { 0, 1, 2, 3, 4 };
         HrzL = new int[] { 0, 8, 9, 10 };
         Square = new int[] { 0, 1, 8, 9 };
-        cornermid = new int[] { 2,0 };
-        cornerHzFive = new int[] { 4,0 };
-        cornerHrzL = new int[] { 2,0 };
-        cornerSquare = new int[] { 1,0 };
+        Three = new int[] { 0, 1, 2 };
+        Single = new int[] { 0 };
+        UpCorner = new int[] { 0, 1, 2, 10, 18 };
+        
         nonboardspace = false;
         save = true;
     }

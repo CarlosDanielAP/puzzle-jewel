@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class Manager : MonoBehaviour {
     public Texture[] textures;
     public Canvas canvas;
+    public Text POINTTEXT;
     public AudioClip[] soundsFX;
+    public AudioClip[] pointSounds;
     public static bool play;
     public Text scoreText;
     public Text bestText;
@@ -63,9 +65,9 @@ public class Manager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-       // loose();
-       
-        
+        // loose();
+
+        Debug.Log(oldscore);
 
        
 
@@ -122,27 +124,31 @@ public class Manager : MonoBehaviour {
             checkall = true;
         }
 
-      
- if (score > oldscore)
+
+        if (!perdiste)
         {
-          
-            // playComplete();
-            oldscore += 10;
-          for(int i = 0; i < respawns.Length; i++)
+            if (score > oldscore)
             {
-                respawns[i].GetComponent<Respawn>().reset();
-                
+
+                playSound();
+
+                oldscore = score;
+                for (int i = 0; i < respawns.Length; i++)
+                {
+                    respawns[i].GetComponent<Respawn>().reset();
+
+                }
+
             }
+            else
 
+
+            {
+                losttime();
+            }
         }
 
-        else 
-
-       
-        {
-        
-            StartCoroutine(losttime());
-        }
+     
 
 
 
@@ -285,20 +291,65 @@ public class Manager : MonoBehaviour {
 
     }
 
-    void loose(){
-       
-      
+    
 
-        
+    void playSound()
+    {
+        int actualScore;
+        actualScore = score-oldscore;
+
+        Animator m_Animator;
+
+        m_Animator = canvas.GetComponent<Animator>();
+        // playComplete();
+
+        if (actualScore == 10)
+        {
+
+            canvas.GetComponent<AudioSource>().clip = pointSounds[0];
+
+            canvas.GetComponent<AudioSource>().Play();
+
+        }
+
+        if (actualScore == 20)
+        {
+            //good sound
+            canvas.GetComponent<AudioSource>().clip = pointSounds[1];
+            POINTTEXT.text = "GOOD";
+            canvas.GetComponent<AudioSource>().Play();
+            m_Animator.SetTrigger("good");
+        }
+        if (actualScore == 30)
+        {
+            //cool sound
+            canvas.GetComponent<AudioSource>().clip = pointSounds[2];
+            POINTTEXT.text = "COOL";
+            canvas.GetComponent<AudioSource>().Play();
+            m_Animator.SetTrigger("cool");
+        }
+        if (actualScore >= 40)
+        {
+            //perfect sound
+            canvas.GetComponent<AudioSource>().clip = pointSounds[3];
+            POINTTEXT.text = "Excellent";
+            canvas.GetComponent<AudioSource>().Play();
+            m_Animator.SetTrigger("perfect");
+        }
 
     }
 
+    IEnumerator gameover()
+    {
 
-    IEnumerator losttime()
+        yield return new WaitForSeconds(2f);
+        Application.LoadLevel("Score");
+    }
+
+        void losttime()
     {
         
-        yield return new WaitForSeconds(0.01f);
-
+       
         respawnCount = 0;
         int freespaces = 0;
 
@@ -325,7 +376,7 @@ public class Manager : MonoBehaviour {
             Debug.Log("perdistessssssssssssssssssssssssssss" + freespaces + "  " + respawnCount);
             perdiste = true;
             PlayerPrefs.SetInt("Score", score);
-            Application.LoadLevel("Score");
+            StartCoroutine("gameover");
         }
 
 
@@ -355,7 +406,8 @@ public class Manager : MonoBehaviour {
             }
         }
         
-        canvas.GetComponent<AudioSource>().Play();
+        
+      
 
     }
 

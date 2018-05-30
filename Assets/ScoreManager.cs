@@ -15,15 +15,16 @@ public class ScoreManager : MonoBehaviour {
     void Start () {
        
        score= PlayerPrefs.GetInt("Score");
-        best = PlayerPrefs.GetInt("Best");
+       
         scoretext.text = score.ToString();
 
         if (PlayerPrefs.GetInt("Best") < score)
         {
-            PlayerPrefs.SetInt("Best", best);
+            PlayerPrefs.SetInt("Best", score);
             best = PlayerPrefs.GetInt("Best");
 
         }
+        //best = PlayerPrefs.GetInt("Best");
         Bestscoretext.text = best.ToString();
 
     }
