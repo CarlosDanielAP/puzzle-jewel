@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
+    public  bool wait;
     public Transform[] blocks;
     public string myblockname;
     public GameObject manager;
@@ -18,6 +19,7 @@ public class Respawn : MonoBehaviour
     public int[] Three;
     public int[] Single;
     public int[] UpCorner;
+    public int[] VrtFour;
     public int arraylength;
     private int fila;
     int cornerBlock;
@@ -26,6 +28,7 @@ public class Respawn : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        wait = false;
         save = true ;
         fila = 0;
         reset();
@@ -37,6 +40,7 @@ public class Respawn : MonoBehaviour
         Three = new int[] { 0,1,2};
         Single = new int[] { 0 };
         UpCorner = new int[] { 0 ,1,2,10,18};
+        VrtFour= new int[] { 0, 8, 16, 24 };
         cornerBlock = 1;
       
         
@@ -46,182 +50,222 @@ public class Respawn : MonoBehaviour
     void Update()
     {
 
-        if (Manager.noblocks)
-        {
-             reset();
-            myblockname = Instantiate(blocks[Random.Range(0, blocks.Length)], new Vector2(transform.position.x, transform.position.y), transform.rotation).name;
 
-        }
-        if (myblockname == null)
+       
+       blocksnames();
+        
+       
+
+    }
+
+
+    
+
+    public void blocksnames()
+    {
+
+
+        nonboardspace = false;
+         //reset();
+            if (Manager.noblocks)
+            {
+                reset();
+                myblockname = Instantiate(blocks[Random.Range(0, blocks.Length)], new Vector2(transform.position.x, transform.position.y), transform.rotation).name;
+
+            }
+            if(manager.GetComponent<Manager>().completeLineh|| manager.GetComponent<Manager>().completeLinev)
         {
-          // reset();
+            reset();
         }
-        freeSpace = true;
-        // nonboardspace = false;
-        if (myblockname == "UpCorner(Clone)" || myblockname == "UpCorner 1(Clone)")
-        {
+            if (myblockname == null)
+            {
+                // reset();
+            }
+            freeSpace = true;
+            // nonboardspace = false;
+
+            if (myblockname == "UpCorner(Clone)" || myblockname == "UpCorner 1(Clone)")
+            {
+                {
+                    if (save == true)
+                    {
+                        fila = 0;
+                        cornerBlock = 2;
+                        cornerSave = 2;
+                        saveBlock = new int[] { 0, 1, 2, 10, 18 };
+                        save = false;
+                    }
+
+                    arraylength = UpCorner.Length;
+                    if (nonboardspace == false)
+                    {
+                        Check(arraylength, UpCorner);
+                    }
+
+
+                }
+            }
+
+            if (myblockname == "tree(Clone)" || myblockname == "tree 1(Clone)")
+            {
+                {
+                    if (save == true)
+                    {
+                        fila = 0;
+                        cornerBlock = 2;
+                        cornerSave = 2;
+                        saveBlock = new int[] { 0, 1, 2 };
+                        save = false;
+                    }
+
+                    arraylength = Three.Length;
+                    if (nonboardspace == false)
+                    {
+                        Check(arraylength, Three);
+                    }
+
+
+                }
+            }
+
+            if (myblockname == "Single(Clone)" || myblockname == "Single 1(Clone)")
+            {
+                {
+                    if (save == true)
+                    {
+                        fila = 0;
+                        cornerBlock = 0;
+                        cornerSave = 0;
+                        saveBlock = new int[] { 0 };
+                        save = false;
+                    }
+
+                    arraylength = Single.Length;
+                    if (nonboardspace == false)
+                    {
+                        Check(arraylength, Single);
+                    }
+
+
+                }
+            }
+
+
+
+            if (myblockname == "MidSquare(Clone)" || myblockname == "MidSquare 1(Clone)")
+            {
+                {
+                    if (save == true)
+                    {
+                        fila = 0;
+                        cornerBlock = 2;
+                        cornerSave = 2;
+                        saveBlock = new int[] { 0, 1, 2, 8, 9, 10, 16, 17, 18 };
+                        save = false;
+                    }
+
+                    arraylength = mid.Length;
+                    if (nonboardspace == false)
+                    {
+                        Check(arraylength, mid);
+                    }
+
+
+                }
+            }
+
+            if (myblockname == "HrzFive(Clone)" || myblockname == "HrzFive 1(Clone)")
+            {
+                {
+                    if (save == true)
+                    {
+                        fila = 0;
+                        cornerBlock = 4;
+                        cornerSave = 4;
+                        saveBlock = new int[] { 0, 1, 2, 3, 4 };
+                        save = false;
+                    }
+
+                    arraylength = HrzFive.Length;
+                    if (nonboardspace == false)
+                    {
+                        Check(arraylength, HrzFive);
+                    }
+
+
+                }
+            }
+            if (myblockname == "HrzL(Clone)" || myblockname == "HrzL 1(Clone)")
+            {
+                {
+                    if (save == true)
+                    {
+                        fila = 0;
+                        cornerBlock = 2;
+                        cornerSave = 2;
+                        saveBlock = new int[] { 0, 8, 9, 10 };
+                        save = false;
+                    }
+
+                    arraylength = HrzL.Length;
+                    if (nonboardspace == false)
+                    {
+                        Check(arraylength, HrzL);
+                    }
+
+
+                }
+            }
+            if (myblockname == "Square(Clone)" || myblockname == "Square 1(Clone)")
             {
                 if (save == true)
                 {
                     fila = 0;
-                    cornerBlock = 2;
-                    cornerSave = 2;
-                    saveBlock = new int[] { 0, 1, 2, 10, 18 };
+                    cornerBlock = 1;
+                    cornerSave = 1;
+                    saveBlock = new int[] { 0, 1, 8, 9 }; ;
                     save = false;
                 }
 
-                arraylength = UpCorner.Length;
+                arraylength = Square.Length;
                 if (nonboardspace == false)
                 {
-                    Check(arraylength, UpCorner);
+                    Check(arraylength, Square);
                 }
 
 
             }
-        }
-
-        if (myblockname == "tree(Clone)" || myblockname == "tree 1(Clone)")
-        {
-            {
-                if (save == true)
-                {
-                    fila = 0;
-                    cornerBlock = 2;
-                    cornerSave = 2;
-                    saveBlock = new int[] { 0, 1, 2 };
-                    save = false;
-                }
-
-                arraylength = Three.Length;
-                if (nonboardspace == false)
-                {
-                    Check(arraylength, Three);
-                }
-
-
-            }
-        }
-
-        if (myblockname == "Single(Clone)" || myblockname == "Single 1(Clone)")
-        {
+            if (myblockname == "VrtFour(Clone)" || myblockname == "VrtFour 1(Clone)")
             {
                 if (save == true)
                 {
                     fila = 0;
                     cornerBlock = 0;
                     cornerSave = 0;
-                    saveBlock = new int[] { 0};
+                    saveBlock = new int[] { 0, 8, 16, 24 }; ;
                     save = false;
                 }
 
-                arraylength = Single.Length;
+                arraylength = VrtFour.Length;
                 if (nonboardspace == false)
                 {
-                    Check(arraylength, Single);
+                    Check(arraylength, VrtFour);
                 }
 
 
             }
-        }
-
-
-
-        if (myblockname == "MidSquare(Clone)" || myblockname == "MidSquare 1(Clone)")
-        {
-            {
-                if (save == true)
-                {
-                    fila = 0;
-                    cornerBlock = 2;
-                    cornerSave = 2;
-                    saveBlock = new int[] { 0, 1, 2, 8, 9, 10, 16, 17, 18 };
-                    save = false;
-                }
-
-                arraylength = mid.Length;
-                if (nonboardspace == false)
-                {
-                    Check(arraylength, mid);
-                }
-
-
-            }
-        }
-
-        if (myblockname == "HrzFive(Clone)" || myblockname == "HrzFive 1(Clone)")
-        {
-            {
-                if (save == true)
-                {
-                    fila = 0;
-                    cornerBlock = 4;
-                    cornerSave = 4;
-                    saveBlock = new int[] { 0, 1, 2, 3, 4 };
-                    save = false;
-                }
-
-                arraylength = HrzFive.Length;
-                if (nonboardspace == false)
-                {
-                    Check(arraylength, HrzFive);
-                }
-
-
-            }
-        }
-        if (myblockname == "HrzL(Clone)" || myblockname == "HrzL 1(Clone)")
-        {
-            {
-                if (save == true)
-                {
-                    fila = 0;
-                    cornerBlock = 2;
-                    cornerSave = 2;
-                    saveBlock = new int[] { 0, 8, 9, 10 };
-                    save = false;
-                }
-
-                arraylength = HrzL.Length;
-                if (nonboardspace == false)
-                {
-                    Check(arraylength, HrzL);
-                }
-
-
-            }
-        }
-        if (myblockname == "Square(Clone)" || myblockname == "Square(Clone)")
-        {
-            if (save == true)
-            {
-                fila = 0;
-                cornerBlock = 1;
-                cornerSave = 1;
-                saveBlock = new int[] { 0, 1, 8, 9 }; ;
-                save = false;
-            }
- 
-            arraylength = Square.Length;
-            if (nonboardspace ==false)
-            {
-                Check(arraylength, Square);
-            }
-           
-           
-        }
-
-
-
+        
     }
-
     public void Check(int _arraylenght, int[] _mid)
     {
+       
+        wait = true;
         if (save == false)
         {
 
             Debug.Log(cornerBlock + "hora" + cornerSave + "fila" + fila + "mi esquina" + _mid[_mid.Length - 1]);
 
-            if (_mid[_arraylenght - 1] > Manager.myspaces.Length)
+            if (_mid[_arraylenght - 1] >= Manager.myspaces.Length)
             {
                 Debug.Log("perdiste");
                 nonboardspace = true;
@@ -245,7 +289,7 @@ public class Respawn : MonoBehaviour
 
 
                 }
-                if (_mid[_mid.Length-1] <= Manager.myspaces.Length)
+                if (_mid[_mid.Length-1] < Manager.myspaces.Length)
                 {
 
                     for (int n = cornerBlock; n < fila + 8; n++)
@@ -298,13 +342,14 @@ public class Respawn : MonoBehaviour
 
             }
         }
+        wait = false;
     }
     
 
-            public void reset()
+  public void reset()
     {
+       nonboardspace = false;
 
-       
         //fila = 0;
         //cornerB = 0;
         mid = new int[] { 0, 1, 2, 8, 9, 10, 16, 17, 18 };
@@ -314,9 +359,12 @@ public class Respawn : MonoBehaviour
         Three = new int[] { 0, 1, 2 };
         Single = new int[] { 0 };
         UpCorner = new int[] { 0, 1, 2, 10, 18 };
+        VrtFour = new int[] { 0, 8, 16, 24 };
         
-        nonboardspace = false;
+
+       
         save = true;
+       // blocksnames();
     }
 }
 

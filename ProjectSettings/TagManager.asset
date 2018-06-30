@@ -6,6 +6,7 @@ TagManager:
   tags:
   - space
   - Block
+  - Pieza
   layers:
   - Default
   - TransparentFX

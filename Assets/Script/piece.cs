@@ -26,76 +26,78 @@ public class piece : MonoBehaviour
 
     void Update()
     {
-        if (!move.perfect)
+        if (!Manager.loose)
         {
-            transform.GetComponent<SpriteRenderer>().sprite = myprite;
-        }
-
-        if (!stay)
-        {
-            FindClosestSpacetoPiece();
-
-
-            if (Input.GetMouseButtonUp(0))
+            if (!move.perfect)
             {
-                
+                transform.GetComponent<SpriteRenderer>().sprite = myprite;
+            }
 
-                //check if all the pieces are in a perfect place
-                if (block.GetComponent<move>().perfectPlace)
+            if (!stay)
+            {
+                FindClosestSpacetoPiece();
+
+
+                if (Input.GetMouseButtonUp(0))
                 {
 
 
-                    if (nearPiece)
+                    //check if all the pieces are in a perfect place
+                    if (block.GetComponent<move>().perfectPlace)
                     {
-                        transform.position = new Vector3(FindClosestSpacetoPiece().transform.position.x,
-                                                         FindClosestSpacetoPiece().transform.position.y,
-                                                         transform.position.z + 0.1f);
-                        //ahora el espacio esta ocupado y ya no podemos mover esta pieza
-                        FindClosestSpacetoPiece().GetComponent<space>().empty = false;
 
-                        //cant move that block any more
-                        block.GetComponent<move>().firstMove = false;
-                        block.GetComponent<move>().spawnPlace.GetComponent<Respawn>().myblockname = null;
-                        Debug.Log("quieta");
-                        //unparent of the block parent to the space an destroy block
-                        transform.parent = null;
-                        transform.position = new Vector3(transform.position.x, transform.position.y, -1);
-                        transform.SetParent(FindClosestSpacetoPiece(), true);
-                        stay = true;
+
+                        if (nearPiece)
+                        {
+                            transform.position = new Vector3(FindClosestSpacetoPiece().transform.position.x,
+                                                             FindClosestSpacetoPiece().transform.position.y,
+                                                             transform.position.z + 0.1f);
+                            //ahora el espacio esta ocupado y ya no podemos mover esta pieza
+                            FindClosestSpacetoPiece().GetComponent<space>().empty = false;
+
+                            //cant move that block any more
+                            block.GetComponent<move>().firstMove = false;
+                            block.GetComponent<move>().spawnPlace.GetComponent<Respawn>().myblockname = null;
+                            Debug.Log("quieta");
+                            //unparent of the block parent to the space an destroy block
+                            transform.parent = null;
+                            transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+                            transform.SetParent(FindClosestSpacetoPiece(), true);
+                            stay = true;
+
+                        }
 
                     }
-
                 }
+
+
+
+
+                /* if (Vector2.Distance(transform.position, spaces[0].transform.position) < 0.5f)
+                 {
+                     Debug.Log("cerca");
+                     //si no esta ocupado lo tomamos
+                     if (spaces[0].GetComponent<space>().empty)
+                     {
+                         //si soltamos la pieza ocupa el lugar del espacio
+                         if (Input.GetMouseButtonUp(0))
+                         {
+                             Debug.Log("ocupar");
+                             transform.position = new Vector3(spaces[0].transform.position.x, spaces[0].transform.position.y, transform.position.z);
+                             //ahora el espacio esta ocupado y ya no podemos mover esta pieza
+                             spaces[0].GetComponent<space>().empty = false;
+
+
+                         }
+                     }
+                 }*/
+
+
+
             }
 
 
-
-
-            /* if (Vector2.Distance(transform.position, spaces[0].transform.position) < 0.5f)
-             {
-                 Debug.Log("cerca");
-                 //si no esta ocupado lo tomamos
-                 if (spaces[0].GetComponent<space>().empty)
-                 {
-                     //si soltamos la pieza ocupa el lugar del espacio
-                     if (Input.GetMouseButtonUp(0))
-                     {
-                         Debug.Log("ocupar");
-                         transform.position = new Vector3(spaces[0].transform.position.x, spaces[0].transform.position.y, transform.position.z);
-                         //ahora el espacio esta ocupado y ya no podemos mover esta pieza
-                         spaces[0].GetComponent<space>().empty = false;
-
-
-                     }
-                 }
-             }*/
-
-
-
         }
-
-
-
 
     }
 

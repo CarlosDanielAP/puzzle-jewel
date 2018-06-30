@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 82253777787894422}
   m_Layer: 0
   m_Name: pieza (1)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 0}
   gameManager: {fileID: 0}
+  spaces: []
   nearPiece: 0
 --- !u!212 &212912622679382120
 SpriteRenderer:

@@ -28,7 +28,7 @@ public class space : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (transform.childCount > 0)
         {
             child = transform.GetChild(0);

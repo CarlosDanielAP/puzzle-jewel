@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61011592147212896}
   m_Layer: 0
   m_Name: Pieza
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 61097025114675812}
   m_Layer: 0
   m_Name: Pieza (2)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 61855599043572850}
   m_Layer: 0
   m_Name: Pieza (1)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

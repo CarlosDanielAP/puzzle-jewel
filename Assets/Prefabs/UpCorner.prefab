@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61069193135967892}
   m_Layer: 0
   m_Name: Pieza (3)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 61346797020880200}
   m_Layer: 0
   m_Name: Pieza
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 61825387044123578}
   m_Layer: 0
   m_Name: Pieza (1)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 61774878426361202}
   m_Layer: 0
   m_Name: Pieza (2)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 61276049678068078}
   m_Layer: 0
   m_Name: Pieza (4)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

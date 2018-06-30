@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Manager : MonoBehaviour {
+    public Sprite spriteloose;
+    public static bool loose;
+    public GameObject[] piezas;
     public Texture[] textures;
     public Canvas canvas;
     public Text POINTTEXT;
@@ -11,7 +14,9 @@ public class Manager : MonoBehaviour {
     public AudioClip[] pointSounds;
     public static bool play;
     public Text scoreText;
+    public Text gameoverScoreText;
     public Text bestText;
+    public Text gameoverBestText;
     public int score;
     public int oldscore;
     public int sizeHorizontal;
@@ -26,9 +31,10 @@ public class Manager : MonoBehaviour {
     public int line;
     public GameObject[] respawns;
     AudioSource audio;
-    public int respawnCount;
+   // public int respawnCount;
     public bool perdiste;
     int column;
+    bool gameoveranimation;
     // Use this for initialization
     void Awake()
     {
@@ -40,6 +46,7 @@ public class Manager : MonoBehaviour {
     }
 
     void Start() {
+        //PlayerPrefs.SetInt("Best", 0);
        bestText.text= PlayerPrefs.GetInt("Best").ToString();
         play = false;
         perdiste = false;
@@ -50,6 +57,7 @@ public class Manager : MonoBehaviour {
         completeLinev = true;
         checkall = false;
         noblocks = false;
+        gameoveranimation = true;
 
         for (int i = 0; i < spaces.Length; i++)
         {
@@ -67,9 +75,30 @@ public class Manager : MonoBehaviour {
     void Update() {
         // loose();
 
-        Debug.Log(oldscore);
+        int x=0;
 
-       
+      /*  for (int n = 0; n < respawns.Length; n++)
+        {
+            if (respawns[n].GetComponent<Respawn>().myblockname == null)
+            {
+                x=n;
+            }
+
+            if (x == 2)
+            {
+                for (int i = 0; i < respawns.Length; i++)
+                {
+                    respawns[i].GetComponent<Respawn>().blocksnames();
+                }
+            }
+          
+
+        }
+
+
+    */
+
+
 
         if (play)
         {
@@ -85,6 +114,7 @@ public class Manager : MonoBehaviour {
         if (GameObject.FindGameObjectsWithTag("Block").Length == 0)
         {
             noblocks = true;
+            
         }
         if (GameObject.FindGameObjectsWithTag("Block").Length > 0)
         {
@@ -117,38 +147,75 @@ public class Manager : MonoBehaviour {
             {
                 checkRight();
             }
+           
 
 
-          
 
             checkall = true;
         }
 
+      
 
+       
         if (!perdiste)
         {
+            Debug.Log(oldscore + "        new score_>   " + score);
+
+
+         
             if (score > oldscore)
             {
 
                 playSound();
 
-                oldscore = score;
-                for (int i = 0; i < respawns.Length; i++)
+                for (int n = 0; n < respawns.Length; n++)
                 {
-                    respawns[i].GetComponent<Respawn>().reset();
+                   
+                    respawns[n].GetComponent<Respawn>().reset();
+                    Debug.Log("dddddddddddddddddddddddddddddd" + n);
 
                 }
 
+
+
+                oldscore = score;
             }
-            else
 
-
+            if (score == oldscore)
             {
-                losttime();
+
+
+             losttime(false);
+
             }
+
+
+
+
+
+
+
+        }
+        
+
+        if (perdiste)
+        {
+            if (gameoveranimation == true)
+            {
+                piezas = GameObject.FindGameObjectsWithTag("Pieza");
+
+                StartCoroutine(loosesprite());
+            }
+
+
         }
 
      
+        loose = perdiste;
+
+
+
+
 
 
 
@@ -161,6 +228,7 @@ public class Manager : MonoBehaviour {
 
             column = k;
             completeLinev = true;
+           
             for (int j = 0; j < sizeVertical; j++)
             {
 
@@ -176,7 +244,7 @@ public class Manager : MonoBehaviour {
             }
             if (completeLinev)
             {
-
+                //losttime();
                 // playComplete();
 
                 column = k;
@@ -204,12 +272,18 @@ public class Manager : MonoBehaviour {
                     }
                     column += sizeVertical;
                 }
+               
+
+
+
                 // playComplete();
                 break;
             }
 
 
         }
+
+       
 
 
     }
@@ -220,6 +294,7 @@ public class Manager : MonoBehaviour {
             line = i * sizeHorizontal;
 
             completeLineh = true;
+           
             for (int j = 0; j < sizeHorizontal; j++)
             {
 
@@ -232,7 +307,7 @@ public class Manager : MonoBehaviour {
             }
             if (completeLineh)
             {
-
+                //losttime();
                 // playComplete();
 
                 // checkDown();
@@ -258,6 +333,8 @@ public class Manager : MonoBehaviour {
                         //playComplete();
                     }
                 }
+
+                
 
 
                 break;
@@ -291,7 +368,7 @@ public class Manager : MonoBehaviour {
 
     }
 
-    
+   
 
     void playSound()
     {
@@ -307,6 +384,8 @@ public class Manager : MonoBehaviour {
         {
 
             canvas.GetComponent<AudioSource>().clip = pointSounds[0];
+
+
 
             canvas.GetComponent<AudioSource>().Play();
 
@@ -341,27 +420,35 @@ public class Manager : MonoBehaviour {
 
     IEnumerator gameover()
     {
+       
 
-        yield return new WaitForSeconds(2f);
-        Application.LoadLevel("Score");
+
+       yield return new WaitForSeconds(2f);
+       // Application.LoadLevel("Score");
     }
 
-        void losttime()
+  void losttime(bool pass)
     {
-        
-       
-        respawnCount = 0;
-        int freespaces = 0;
 
+       
+
+
+
+        int respawnCount = 0;
+        int freespaces = 0;
+       
+       
 
         for (int i = 0; i < respawns.Length; i++)
         {
-
+           // respawns[i].GetComponent<Respawn>().blocksnames();
 
             if (respawns[i].GetComponent<Respawn>().myblockname != null)
             {
+                
                 Debug.Log(respawns[i].GetComponent<Respawn>().myblockname);
                 respawnCount++;
+               
                 if (respawns[i].GetComponent<Respawn>().nonboardspace)
                 {
                     freespaces++;
@@ -371,18 +458,26 @@ public class Manager : MonoBehaviour {
               
 
         }
-        if (freespaces>0&&freespaces == respawnCount)
+
+        if (freespaces > 0 && freespaces == respawnCount)
         {
-            Debug.Log("perdistessssssssssssssssssssssssssss" + freespaces + "  " + respawnCount);
-            perdiste = true;
-            PlayerPrefs.SetInt("Score", score);
-            StartCoroutine("gameover");
-        }
+            
+
+                    Debug.Log("perdistessssssssssssssssssssssssssss" + freespaces + "  " + respawnCount);
+                    perdiste = true;
+                    PlayerPrefs.SetInt("Score", score);
 
 
+
+                    //  StartCoroutine("gameover");
+         }
+            
+        
     }
 
-    void Particleplay(int startline,bool right)
+
+
+   void Particleplay(int startline,bool right)
     {
         Debug.Log("audioooooooooooooooooooooooooooooo");
         if (right)
@@ -432,6 +527,47 @@ public class Manager : MonoBehaviour {
     {
         Application.LoadLevel("Game");
 
+    }
+
+    IEnumerator loosesprite()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.05f);
+        for (int i = 0; i < piezas.Length; i++)
+        {
+
+            piezas[i].transform.GetComponent<SpriteRenderer>().sprite = spriteloose;
+            yield return wait;
+
+        }
+
+        Animator m_Animator;
+
+        m_Animator = canvas.GetComponent<Animator>();
+
+        m_Animator.SetTrigger("GameOver");
+
+        gameoverScoreText.text = score.ToString();
+         gameoverBestText.text = PlayerPrefs.GetInt("Best").ToString();
+
+
+        if (score > PlayerPrefs.GetInt("Best"))
+        {
+            m_Animator.SetTrigger("Best");
+            PlayerPrefs.SetInt("Best",score);
+            gameoverBestText.text = PlayerPrefs.GetInt("Best").ToString();
+
+        }
+
+       wait = new WaitForSeconds(0.001f);
+
+        for (int i = 0; i <= score; i++)
+        {
+
+            gameoverScoreText.text = i.ToString();
+            yield return wait;
+
+        }
+        gameoveranimation = false;
     }
 
 }

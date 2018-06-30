@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61574823495182958}
   m_Layer: 0
   m_Name: Pieza (2)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 61386198500044416}
   m_Layer: 0
   m_Name: Pieza (3)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 61441701450151254}
   m_Layer: 0
   m_Name: Pieza (5)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 61719048547406214}
   m_Layer: 0
   m_Name: Pieza (6)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 61569364511723296}
   m_Layer: 0
   m_Name: Pieza (1)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 61631817651895138}
   m_Layer: 0
   m_Name: Pieza
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 61880386137474432}
   m_Layer: 0
   m_Name: Pieza (4)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 61359360188233260}
   m_Layer: 0
   m_Name: Pieza (7)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 61849725116395144}
   m_Layer: 0
   m_Name: Pieza (8)
-  m_TagString: Untagged
+  m_TagString: Pieza
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

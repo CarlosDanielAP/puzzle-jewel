@@ -50,45 +50,50 @@ public class move : MonoBehaviour {
 
 
     }
-    
-	
-	// Update is called once per frame
-	void Update () {
-        perfect = false;
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, spawnPlace.transform.position, step);
-        
-        //make bigger and shorter the block
-        if (Input.GetMouseButtonUp(0) && !perfectPlace)
-        {
-            speed = 1000;
-            
-            transform.localScale = new Vector2(0.5f, 0.5f);
-            // gameObject.transform.position = spawnPlace.transform.position;
-            
-      
-        }
 
-        if (Input.GetMouseButtonDown(0))
-           
-            
-        {
-            speed = 0;
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
-            if (hit.collider != null)
+    // Update is called once per frame
+    void Update()
+    {
+        if (!Manager.loose)
+        {
+
+
+            perfect = false;
+            float step = speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, spawnPlace.transform.position, step);
+
+            //make bigger and shorter the block
+            if (Input.GetMouseButtonUp(0) && !perfectPlace)
             {
-                Debug.Log("Something was clicked!");
-                hit.collider.transform.localScale = new Vector2(1f, 1f);
-                AudioSource audio = GetComponent<AudioSource>();
-                audio.clip = put[0];
-                audio.Play();
+                speed = 1000;
+
+                transform.localScale = new Vector2(0.5f, 0.5f);
+                // gameObject.transform.position = spawnPlace.transform.position;
+
+
             }
 
-           
-        }
+            if (Input.GetMouseButtonDown(0))
+
+
+            {
+                speed = 0;
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+                RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+                if (hit.collider != null)
+                {
+                    Debug.Log("Something was clicked!");
+                    hit.collider.transform.localScale = new Vector2(1f, 1f);
+                    AudioSource audio = GetComponent<AudioSource>();
+                    audio.clip = put[0];
+                    audio.Play();
+                }
+
+
+            }
 
 
 
@@ -96,114 +101,115 @@ public class move : MonoBehaviour {
 
 
             if (transform.childCount <= 0)
-        {
-            Manager.play = true;
-
-            Debug.Log("huerfano");
-            Destroy(gameObject);
-        }
-
-
-
-        //if any piece of the block its in a perfect place 
-        perfectPlace = true;
-        for(int i=0; i < pieces.Length; i++)
-        {
-            if (!pieces[i].GetComponent<piece>().nearPiece)
             {
-                perfectPlace = false;
-                break;
-            }
-           
-        }
+                Manager.play = true;
 
-        if (perfectPlace)
-        {
-            perfect = true;
-            int myspace;
-            int myspaceh;
+                Debug.Log("huerfano");
+                Destroy(gameObject);
+            }
+
+
+
+            //if any piece of the block its in a perfect place 
+            perfectPlace = true;
             for (int i = 0; i < pieces.Length; i++)
             {
-              
-                if (pieces[i].GetComponent<piece>().nearPiece)
+                if (!pieces[i].GetComponent<piece>().nearPiece)
+                {
+                    perfectPlace = false;
+                    break;
+                }
+
+            }
+
+            if (perfectPlace)
+            {
+                perfect = true;
+                int myspace;
+                int myspaceh;
+                for (int i = 0; i < pieces.Length; i++)
                 {
 
-                    myspace = pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece();
-                    myspaceh = pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece();
-
-                    //Debug.Log("perfect" + myspace);
-
-                    //  manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().empty = false;
-                    manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().near = true;
-                    // Debug.Log("myspaaaaaice" + myspace);
-                    for (int j = 0; j < 8; j++)
+                    if (pieces[i].GetComponent<piece>().nearPiece)
                     {
-                        
-                        if (myspace > 7)
-                        {
-                            myspace -= 8;
 
-                        }
-                        if(myspace<=7)
-                            
+                        myspace = pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece();
+                        myspaceh = pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece();
+
+                        //Debug.Log("perfect" + myspace);
+
+                        //  manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().empty = false;
+                        manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().near = true;
+                        // Debug.Log("myspaaaaaice" + myspace);
+                        for (int j = 0; j < 8; j++)
                         {
-                            int cuenta = 0;
-                            int myspace2 = myspace;
-                            for (int k = 0; k < 8; k++)
+
+                            if (myspace > 7)
                             {
-                                if (manager.GetComponent<Manager>().spaces[myspace2].GetComponent<space>().near)
+                                myspace -= 8;
+
+                            }
+                            if (myspace <= 7)
+
+                            {
+                                int cuenta = 0;
+                                int myspace2 = myspace;
+                                for (int k = 0; k < 8; k++)
                                 {
-                                    cuenta++;
-                                    
-                                }
-                                if (!manager.GetComponent<Manager>().spaces[myspace2].GetComponent<space>().empty)
-                                {
-                                    cuenta++;
-
-                                }
-
-
-
-                               
-
-                                myspace2 += 8;
-                                if (cuenta == 8)
-                                {
-                                    for (int l = 0; l <  8; l++)
+                                    if (manager.GetComponent<Manager>().spaces[myspace2].GetComponent<space>().near)
                                     {
+                                        cuenta++;
 
-                                        if (!manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().empty)
-                                        {
-                                            Sprite newcolor = pieces[0].transform.GetComponent<SpriteRenderer>().sprite;
-                                            colorname = newcolor.name;
-                                            manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite = newcolor;
-
-                                        }
-                                        myspace += 8;
                                     }
+                                    if (!manager.GetComponent<Manager>().spaces[myspace2].GetComponent<space>().empty)
+                                    {
+                                        cuenta++;
+
+                                    }
+
+
+
+
+
+                                    myspace2 += 8;
+                                    if (cuenta == 8)
+                                    {
+                                        for (int l = 0; l < 8; l++)
+                                        {
+
+                                            if (!manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().empty)
+                                            {
+                                                Sprite newcolor = pieces[0].transform.GetComponent<SpriteRenderer>().sprite;
+                                                colorname = newcolor.name;
+                                                manager.GetComponent<Manager>().spaces[myspace].GetComponent<space>().child.GetComponent<SpriteRenderer>().sprite = newcolor;
+
+                                            }
+                                            myspace += 8;
+                                        }
+                                    }
+
+
                                 }
+
 
 
                             }
-                           
-
 
                         }
 
+
+                        changeright(myspaceh);
+
+
+
                     }
-                   
-                  
-                    changeright(myspaceh);
-
-
+                    // else
+                    // manager.GetComponent<Manager>().spaces[pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece()].GetComponent<space>().near = false;
 
                 }
-               // else
-               // manager.GetComponent<Manager>().spaces[pieces[i].GetComponent<piece>().FindClosestSpacenumbertoPiece()].GetComponent<space>().near = false;
-                
-            }
-                   
 
+
+            }
         }
     }
 
@@ -213,18 +219,19 @@ public class move : MonoBehaviour {
 
     void OnMouseDrag()
     {
-     
-
-            if (firstMove)
+        if (!Manager.loose)
         {
 
+            if (firstMove)
+            {
 
-            Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
-            Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            transform.position = objPosition;
+
+                Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
+                Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                transform.position = objPosition;
+            }
         }
     }
-
     void changeright(int myspace)
     {
         for (int j = 0; j < 8; j++)
