@@ -21,7 +21,7 @@
     <file>Assets/Plugins/Android/com.sglib.easymobile.easy-mobile-1.3.0.aar</file>
   </files>
   <settings>
-    <setting name="androidAbis" value="armeabi-v7a,x86" />
+    <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />
     <setting name="bundleId" value="com.MisMichis.Puzzle" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
